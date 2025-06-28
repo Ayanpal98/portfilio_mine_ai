@@ -1,0 +1,2223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayan Pal - Professional Portfolio</title>
+    <!-- Google Fonts for Poppins and Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* General Styling - Dark Theme (Default) */
+        :root {
+            /* Dark Theme Variables (Bold Black & Gold) */
+            --primary-color: #FFD700; /* Gold */
+            --secondary-color: #bbbbbb; /* Light grey text */
+            --dark-bg-deep: #000000; /* Bold Black */
+            --dark-bg-deep-rgb: 0, 0, 0; /* RGB components for bold black */
+            --dark-bg-mid: #1a1a1a; /* Very dark grey for subtle gradient */
+            --dark-bg-mid-rgb: 26, 26, 26; /* RGB components for very dark grey */
+            --dark-bg-light: #2c2c2c; /* Slightly lighter black for cards */
+            --dark-bg-light-rgb: 44, 44, 44; /* RGB components for lighter black */
+            --text-color-primary: #ffffff; /* White text for main content */
+            --text-color-secondary: #cccccc; /* Slightly darker white for secondary text */
+            --card-bg-base: #2c2c2c; /* Card background */
+            --hover-effect: #FFEB84; /* Brighter gold for hover */
+            --shadow-color: rgba(0, 0, 0, 0.6); /* Darker shadow for dark theme */
+            --glow-color: rgba(255, 215, 0, 0.6); /* Gold glow */
+            --hero-overlay-color: rgba(0, 0, 0, 0.7); /* Dark overlay for hero */
+
+            /* Light Theme Variables */
+            --light-primary-color: #6a4cff; /* A vibrant blue-purple */
+            --light-secondary-color: #555555;
+            --light-bg-deep: #f8f8f8;
+            --light-bg-mid: #ffffff;
+            --light-bg-light: #eeeeee;
+            --light-text-color-primary: #333333;
+            --light-text-color-secondary: #666666;
+            --light-card-bg-base: #f0f0f0;
+            --light-hover-effect: #4b2eff;
+            --light-shadow-color: rgba(0, 0, 0, 0.15);
+            --light-glow-color: rgba(106, 76, 255, 0.4);
+            --light-hero-overlay-color: rgba(255, 255, 255, 0.7); /* Light overlay */
+
+            --transition-speed: 0.3s ease;
+            --glass-blur: 15px; /* Blur strength */
+            --glass-bg-opacity: 0.4; /* Opacity for glassmorphism background */
+            --glass-border-opacity: 0.15; /* Opacity for glassmorphism border */
+        }
+
+        /* Current Theme Variables - dynamically updated by JavaScript and data-theme attribute */
+        body {
+            --current-primary-color: var(--primary-color);
+            --current-secondary-color: var(--secondary-color);
+            --current-bg-deep: var(--dark-bg-deep);
+            --current-bg-deep-rgb: var(--dark-bg-deep-rgb);
+            --current-bg-mid: var(--dark-bg-mid);
+            --current-bg-mid-rgb: var(--dark-bg-mid-rgb);
+            --current-bg-light: var(--dark-bg-light);
+            --current-bg-light-rgb: var(--dark-bg-light-rgb);
+            --current-text-color-primary: var(--text-color-primary);
+            --current-text-color-secondary: var(--text-color-secondary);
+            --current-card-bg-base: var(--card-bg-base);
+            --current-hover-effect: var(--hover-effect);
+            --current-shadow-color: var(--shadow-color);
+            --current-glow-color: var(--glow-color);
+            --current-hero-overlay-color: var(--hero-overlay-color);
+
+            font-family: 'Poppins', sans-serif; /* Default body font */
+            line-height: 1.6;
+            background: linear-gradient(135deg, var(--current-bg-deep) 0%, var(--current-bg-mid) 100%);
+            color: var(--current-text-color-primary);
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+            cursor: none; /* Hide default cursor */
+        }
+
+        body[data-theme="light"] {
+            --current-primary-color: var(--light-primary-color);
+            --current-secondary-color: var(--light-secondary-color);
+            --current-bg-deep: var(--light-bg-deep);
+            --current-bg-deep-rgb: 248, 248, 248; /* RGB for #f8f8f8 */
+            --current-bg-mid: var(--light-bg-mid);
+            --current-bg-mid-rgb: 255, 255, 255; /* RGB for #ffffff */
+            --current-bg-light: var(--light-bg-light);
+            --current-bg-light-rgb: 238, 238, 238; /* RGB for #eeeeee */
+            --current-text-color-primary: var(--light-text-color-primary);
+            --current-text-color-secondary: var(--light-text-color-secondary);
+            --current-card-bg-base: var(--light-card-bg-base);
+            --current-hover-effect: var(--light-hover-effect);
+            --current-shadow-color: var(--light-shadow-color);
+            --current-glow-color: var(--light-glow-color);
+            --light-hero-overlay-color: rgba(255, 255, 255, 0.7); /* Light overlay */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif; /* Headings font */
+            color: var(--current-text-color-primary);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--current-primary-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInFromTop {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(100%); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInOverlay {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes heroGlow {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
+            100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.3; }
+        }
+
+        /* Initial state for scroll-triggered animations */
+        .animated-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .animated-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* Main Layout Wrapper - no sidebar in this design */
+        .main-wrapper {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding-top: 80px; /* Offset for fixed navbar */
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: rgba(var(--current-bg-deep-rgb), 0.7);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-bottom: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+            box-shadow: 0 2px 15px var(--current-shadow-color);
+            animation: fadeInFromTop 0.8s ease-out;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--current-primary-color);
+            transition: color var(--transition-speed);
+        }
+        .navbar .logo:hover {
+            color: var(--current-hover-effect);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links li a {
+            color: var(--current-text-color-secondary);
+            font-weight: 500;
+            transition: color var(--transition-speed), transform 0.2s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: var(--current-primary-color);
+            transform: translateY(-2px); /* Subtle lift on hover/active */
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--current-primary-color);
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            transition: width var(--transition-speed);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 70%;
+        }
+
+        .nav-hire-btn {
+            background-color: var(--current-primary-color);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 5px;
+            margin-left: 20px;
+            transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2);
+        }
+        .nav-hire-btn:hover {
+            background-color: var(--current-hover-effect);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--current-text-color-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: 15px;
+            transition: color var(--transition-speed), transform var(--transition-speed);
+            padding: 5px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theme-toggle-btn:hover {
+            color: var(--current-primary-color);
+            transform: scale(1.1) rotate(15deg);
+        }
+
+
+        /* Hero Section */
+        .hero-section {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px;
+            position: relative;
+            background: linear-gradient(135deg, var(--current-bg-deep) 0%, var(--current-bg-mid) 100%);
+            animation: fadeIn 1s ease-out 0.5s forwards;
+            opacity: 0;
+            overflow: hidden;
+            perspective: 1000px; /* For 3D transforms / parallax */
+        }
+
+        /* Pseudo-element for animated background glow (parallax target) */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120vh;
+            height: 120vh;
+            background: radial-gradient(circle at center, var(--current-glow-color) 0%, transparent 60%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0.8) translateZ(-100px); /* Initial Z for parallax */
+            opacity: 0.3;
+            animation: heroGlow 8s ease-in-out infinite alternate;
+            z-index: 1;
+            pointer-events: none;
+            transition: transform 0.1s ease-out; /* Smooth parallax movement */
+        }
+
+
+        .hero-content {
+            max-width: 600px;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1.2s ease-out 0.8s forwards;
+            opacity: 0;
+            transform: translateZ(0); /* Ensure content is on its own layer for parallax */
+        }
+
+        .hero-content h1 {
+            font-size: 3.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--current-text-color-primary);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: var(--current-text-color-secondary);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Styled Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .primary-btn {
+            background-color: var(--current-primary-color);
+            color: #fff;
+            border: none;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .primary-btn:hover {
+            background-color: var(--current-hover-effect);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .secondary-btn {
+            background-color: transparent;
+            color: var(--current-primary-color);
+            border: 2px solid var(--current-primary-color);
+        }
+
+        .secondary-btn:hover {
+            background-color: var(--current-primary-color);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        /* General Section Styling */
+        section {
+            padding: 80px 40px;
+            background: linear-gradient(135deg, var(--current-bg-deep) 0%, var(--current-bg-mid) 100%);
+            /* animation properties handled by .animated-section */
+        }
+
+
+        /* Headings for all content sections */
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            color: var(--current-text-color-primary);
+            text-align: center;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+        h2 span.highlight {
+            color: var(--current-primary-color);
+        }
+
+        /* Content Box for sections */
+        .section-content-box {
+            background: rgba(var(--current-bg-light-rgb), var(--glass-bg-opacity));
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+            border-radius: 15px;
+            padding: 40px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px var(--current-shadow-color);
+            max-width: 900px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section-content-box:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        /* About Section (Now "What I Do" style) */
+        .about-section {
+            background: linear-gradient(135deg, var(--current-bg-mid) 0%, var(--current-bg-deep) 100%);
+            text-align: center;
+        }
+
+        .about-section .section-content-box p {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+            color: var(--current-text-color-secondary);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-card {
+            background: rgba(var(--current-bg-light-rgb), 0.7);
+            backdrop-filter: blur(calc(var(--glass-blur) / 2));
+            -webkit-backdrop-filter: blur(calc(var(--glass-blur) / 2));
+            border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px var(--current-shadow-color);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .about-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 25px 5px var(--current-primary-color);
+            background-color: rgba(var(--current-bg-light-rgb), 0.9);
+        }
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+            transform: rotate(0deg);
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.8s ease-out;
+            z-index: -1;
+        }
+        .about-card:hover::before {
+            opacity: 1;
+            transform: rotate(45deg);
+        }
+
+
+        .about-card .icon-placeholder {
+            width: 60px;
+            height: 60px;
+            background-color: var(--current-primary-color);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 2rem;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+        }
+        .about-card:hover .icon-placeholder {
+            background-color: var(--current-hover-effect);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+        /* Specific icons for skills */
+        .about-card .icon-placeholder.content-icon::before {
+            content: '\f040'; /* Font Awesome pen-alt */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+        .about-card .icon-placeholder.ai-icon::before {
+            content: '\f0e7'; /* Font Awesome bolt */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+        .about-card .icon-placeholder.business-icon::before {
+            content: '\f201'; /* Font Awesome chart-line */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+        .about-card .icon-placeholder.uiux-icon::before {
+            content: '\f108'; /* Font Awesome desktop */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+        .about-card .icon-placeholder.project-icon::before {
+            content: '\f0ae'; /* Font Awesome list-alt */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+        .about-card .icon-placeholder.python-icon::before {
+            content: '\f3e2'; /* Font Awesome python */
+            font-family: "Font Awesome 5 Brands";
+            font-weight: 400;
+        }
+
+
+        .about-card h3 {
+            font-size: 1.5rem;
+            color: var(--current-primary-color);
+            margin-bottom: 10px;
+        }
+        .about-card p {
+            font-size: 0.95rem;
+            color: var(--current-text-color-secondary);
+            margin-bottom: 0;
+        }
+
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        /* Make the entire portfolio item a link */
+        .portfolio-item-link {
+            display: block;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 100%;
+            color: inherit;
+        }
+
+        .portfolio-item {
+            background: rgba(var(--current-bg-light-rgb), 0.6);
+            backdrop-filter: blur(calc(var(--glass-blur) / 2));
+            -webkit-backdrop-filter: blur(calc(var(--glass-blur) / 2));
+            border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px var(--current-shadow-color);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed), background-color 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 25px 5px var(--current-primary-color);
+            background-color: rgba(var(--current-bg-light-rgb), 0.8);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+            transition: transform 0.4s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .portfolio-content {
+            padding: 20px;
+            text-align: left;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--current-primary-color);
+        }
+
+        .portfolio-content p {
+            font-size: 0.9rem;
+            color: var(--current-text-color-secondary);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        /* Hide the old 'View Project' link inside the card since the whole card is now clickable */
+        .portfolio-content .project-links {
+            display: none;
+        }
+
+
+        /* Case Study Section */
+        .case-study-section .section-content-box ul {
+            list-style: disc;
+            margin: 20px auto 30px;
+            max-width: 800px;
+            text-align: left;
+            padding-left: 25px;
+            color: var(--current-text-color-secondary);
+        }
+        .case-study-section .section-content-box ul li {
+            margin-bottom: 10px;
+        }
+        .case-study-section .section-content-box strong {
+            color: var(--current-primary-color);
+        }
+        .case-study-section .section-content-box p {
+            font-size: 1.05rem;
+            color: var(--current-text-color-secondary);
+            margin-bottom: 30px;
+        }
+        .case-study-section .section-content-box .hero-buttons {
+            margin-top: 30px;
+        }
+
+
+        /* Performance Dashboard Section */
+        .performance-dashboard-section {
+            background: linear-gradient(135deg, var(--current-bg-deep) 0%, var(--current-bg-mid) 100%);
+        }
+        .chart-container { /* This is the section-content-box for the chart */
+            background: rgba(var(--current-bg-light-rgb), 0.6);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px var(--current-shadow-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .chart-container p {
+            color: var(--current-text-color-secondary);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        .main-chart-svg { /* Specific class for main chart */
+            width: 100%;
+            height: 400px;
+            display: block;
+        }
+        /* Style for D3 generated elements if needed (e.g. axis labels) */
+        .chart-axis-label {
+            fill: var(--current-text-color-secondary) !important;
+            font-size: 0.9em;
+        }
+        .chart-title {
+            fill: var(--current-text-color-primary) !important;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+        .line-chart-line {
+            fill: none;
+            stroke: var(--current-primary-color);
+            stroke-width: 3px;
+        }
+        .line-chart-dot {
+            fill: var(--current-primary-color);
+            stroke: #fff;
+            stroke-width: 1.5px;
+            cursor: pointer;
+        }
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: auto;
+            height: auto;
+            padding: 8px;
+            font: 12px sans-serif;
+            background: rgba(0,0,0,0.8);
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+            color: #fff;
+            opacity: 0;
+            transition: opacity 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background: linear-gradient(135deg, var(--current-bg-mid) 0%, var(--current-bg-deep) 100%);
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .testimonial-card {
+            background: rgba(var(--current-bg-light-rgb), 0.7);
+            backdrop-filter: blur(calc(var(--glass-blur) / 2));
+            -webkit-backdrop-filter: blur(calc(var(--glass-blur) / 2));
+            border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px var(--current-shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 25px 5px var(--current-primary-color);
+        }
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--current-text-color-secondary);
+            font-size: 1.05rem;
+        }
+        .testimonial-card .client-info {
+            font-weight: 600;
+            color: var(--current-primary-color);
+            font-size: 1.1rem;
+        }
+        .testimonial-card .client-info span {
+            display: block;
+            font-size: 0.9em;
+            color: var(--current-text-color-secondary);
+            font-weight: 400;
+            margin-top: 5px;
+        }
+        .star-rating {
+            margin-bottom: 15px;
+            color: var(--current-primary-color); /* Stars colored by primary color */
+            font-size: 1.3rem;
+        }
+        .star-rating .fas {
+            margin: 0 2px;
+        }
+
+        /* Tools Section - Reuses About card styling for consistency */
+        .tools-section .section-content-box {
+            text-align: center; /* Center the text above the grid */
+        }
+        .tools-section .section-content-box p {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+            color: var(--current-text-color-secondary);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly smaller min width for more tools */
+            gap: 30px;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Reusing .about-card and .icon-placeholder styles for tools, but can add specific classes if needed */
+        .tool-card .icon-placeholder {
+            /* Specific icon styling for tools, if different from general skill icons */
+        }
+        .tool-card .icon-placeholder.figma-icon::before {
+            content: '\f791'; /* Font Awesome Figma icon */
+            font-family: "Font Awesome 5 Brands";
+            font-weight: 400;
+        }
+        .tool-card .icon-placeholder.drawio-icon::before {
+            content: '\f0ae'; /* Using list-alt for placeholder, as no specific draw.io icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+        .tool-card .icon-placeholder.eraser-icon::before {
+            content: '\f12d'; /* Font Awesome eraser icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+        .tool-card .icon-placeholder.mermaid-icon::before {
+             content: '\f201'; /* Using chart-line for placeholder, as no specific Mermaid icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+        .tool-card .icon-placeholder.orange-icon::before {
+            content: '\f521'; /* Using cube for placeholder, as no specific Orange icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+        .tool-card .icon-placeholder.generative-ai-icon::before {
+            content: '\f640'; /* Font Awesome brain icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+
+
+        /* Contact Section */
+        .contact-form-container {
+            background: rgba(var(--current-bg-light-rgb), 0.6);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px var(--current-shadow-color);
+        }
+
+        .contact-form-container form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-form-container input,
+        .contact-form-container textarea {
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Slightly more visible border */
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.08); /* Slightly more visible transparent background */
+            color: var(--current-text-color-primary);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color var(--transition-speed), background-color var(--transition-speed), box-shadow 0.2s ease;
+        }
+
+        .contact-form-container input:focus,
+        .contact-form-container textarea:focus {
+            border-color: var(--current-primary-color);
+            background-color: rgba(255, 255, 255, 0.15); /* More opaque on focus */
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Gold glow on focus */
+        }
+        /* Placeholder color for inputs */
+        .contact-form-container input::placeholder,
+        .contact-form-container textarea::placeholder {
+            color: var(--current-text-color-secondary);
+            opacity: 0.8;
+        }
+
+
+        .contact-form-container textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form-container button {
+            background-color: var(--current-primary-color);
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .contact-form-container button:hover {
+            background-color: var(--current-hover-effect);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .highlight-link {
+            color: var(--current-primary-color);
+            font-weight: 600;
+            transition: color var(--transition-speed);
+        }
+        .highlight-link:hover {
+            color: var(--current-hover-effect);
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: var(--current-bg-deep);
+            color: var(--current-text-color-secondary);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            background-color: var(--current-primary-color);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.5;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+            z-index: 9999;
+            mix-blend-mode: exclusion; /* Makes it look cool on various backgrounds */
+            display: none; /* Hidden by default, shown by JS */
+            box-shadow: 0 0 15px var(--current-primary-color);
+        }
+        body.has-custom-cursor .custom-cursor {
+            display: block;
+        }
+        .custom-cursor.active { /* For hover effect */
+            width: 40px;
+            height: 40px;
+            opacity: 0.8;
+            background-color: var(--current-hover-effect);
+        }
+
+        /* Back to Top Button */
+        #backToTopBtn {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: var(--current-primary-color);
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: background-color 0.3s, opacity 0.3s, transform 0.3s;
+            opacity: 0; /* Hidden state */
+        }
+
+        #backToTopBtn:hover {
+            background-color: var(--current-hover-effect);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        #backToTopBtn.show {
+            opacity: 1;
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            .hero-buttons {
+                justify-content: flex-start;
+            }
+            .hero-section {
+                padding-left: 20px;
+                padding-right: 20px;
+                justify-content: center;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-card {
+                text-align: center;
+            }
+            .about-card .icon-placeholder {
+                margin: 0 auto 20px;
+            }
+
+            .section-content-box {
+                padding: 30px;
+            }
+            /* Modal adjustments for smaller screens */
+            .skill-modal-content {
+                width: 95%;
+                margin: 20px auto;
+                padding: 25px;
+            }
+            .modal-chart-svg {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-wrapper {
+                padding-top: 60px;
+            }
+            .navbar {
+                padding: 0.8rem 0;
+                justify-content: center;
+            }
+            .navbar .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-hire-btn {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+                text-align: center;
+            }
+            .hero-content p {
+                font-size: 1rem;
+                text-align: center;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+            section {
+                padding: 40px 20px;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            .about-section > p {
+                font-size: 1rem;
+            }
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            .main-chart-svg {
+                height: 300px;
+            }
+            .section-content-box {
+                padding: 25px;
+            }
+             .custom-cursor {
+                display: none !important; /* Hide custom cursor on mobile */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .hero-content p {
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            .about-card h3 {
+                font-size: 1.2rem;
+            }
+            .about-card .icon-placeholder {
+                width: 50px;
+                height: 50px;
+                font-size: 1.8rem;
+            }
+            .theme-toggle-btn {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Modal Styling */
+        .skill-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(var(--current-bg-deep-rgb), 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .skill-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            animation: fadeInOverlay 0.3s ease-out;
+        }
+
+        .skill-modal-content {
+            background: rgba(var(--current-bg-mid-rgb), 0.95); /* More opaque for modal */
+            border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+            border-radius: 15px;
+            padding: 40px;
+            position: relative;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            animation: slideInUp 0.4s ease-out;
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        .skill-modal-overlay.active .skill-modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+
+        .skill-modal-content .close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--current-text-color-secondary);
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+        .skill-modal-content .close-button:hover {
+            color: var(--current-primary-color);
+            transform: rotate(90deg);
+        }
+
+        .skill-modal-content h3 {
+            font-size: 2rem;
+            color: var(--current-primary-color);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .modal-chart-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .modal-chart-svg {
+            width: 100%;
+            height: 350px;
+            background-color: rgba(var(--current-bg-deep-rgb), 0.3);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+            margin-top: 15px;
+        }
+
+        /* Specific styles for modal charts (reusing from project pages for consistency) */
+        .chart-axis-label {
+            fill: var(--current-text-color-secondary) !important;
+            font-size: 0.85em;
+        }
+        .line-chart-line {
+            fill: none;
+            stroke: var(--current-primary-color);
+            stroke-width: 3px;
+        }
+        .line-chart-dot {
+            fill: var(--current-primary-color);
+            stroke: #fff;
+            stroke-width: 1.5px;
+            cursor: pointer;
+        }
+        .bar-chart-bar {
+            fill: var(--current-primary-color);
+            transition: fill 0.3s ease;
+        }
+        .bar-chart-bar:hover {
+            fill: var(--current-hover-effect);
+        }
+        .bar-label {
+            fill: var(--current-text-color-secondary);
+            font-size: 0.9em;
+            text-anchor: end;
+        }
+        .bar-value {
+            fill: var(--current-text-color-primary);
+            font-size: 0.8em;
+            text-anchor: start;
+        }
+    </style>
+    <!-- D3.js library for charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+</head>
+<body>
+    <div id="loadingOverlay"></div> <!-- Loading Overlay -->
+    <div class="custom-cursor"></div> <!-- Custom Cursor -->
+
+    <div class="main-wrapper">
+        <header class="navbar">
+            <div class="container">
+                <div class="logo">Ayan Pal</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#case-study">Case Study</a></li>
+                    <li><a href="#performance">Performance</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#tools">Tools</a></li> <!-- New nav link for Tools -->
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle light and dark mode">
+                    <i class="fas fa-sun" style="display: none;"></i>
+                    <i class="fas fa-moon" style="display: none;"></i>
+                </button>
+                <a href="#contact" class="nav-hire-btn">Hire Me</a>
+            </div>
+        </header>
+
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <h1>Ayan Pal<br><span class="highlight">Driving Digital Impact</span><br>Professional Portfolio</h1>
+                <p>Content Strategist | AI Solutions Developer | Business Growth Expert</p>
+                <div class="hero-buttons">
+                    <a href="#portfolio" class="btn primary-btn">View My Work</a>
+                    <a href="#contact" class="btn secondary-btn">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section animated-section">
+            <div class="container">
+                <h2>What <span class="highlight">I Do</span></h2>
+                <div class="section-content-box">
+                    <p>Results-driven Content Strategist with 2+ years of experience blending academic content creation, AI solutions, and business development. My expertise delivers measurable improvements in engagement, efficiency, and growth. I leverage data and technology to create impactful digital experiences and streamline operations. Let's create something extraordinary.</p>
+                    <div class="about-grid">
+                        <div class="about-card" data-skill-category="content-seo">
+                            <div class="icon-placeholder content-icon"></div>
+                            <h3>Content & SEO Strategy</h3>
+                            <p>Crafting data-driven content and SEO strategies that boost online visibility and audience engagement.</p>
+                        </div>
+                        <div class="about-card" data-skill-category="ai-ml">
+                            <div class="icon-placeholder ai-icon"></div>
+                            <h3>AI & ML Development</h3>
+                            <p>Designing and deploying intelligent AI/ML solutions that automate tasks and enhance system performance.</p>
+                        </div>
+                        <div class="about-card" data-skill-category="business-dev">
+                            <div class="icon-placeholder business-icon"></div>
+                            <h3>Business Development</h3>
+                            <p>Identifying key opportunities, fostering client relationships, and driving significant revenue growth.</p>
+                        </div>
+                         <div class="about-card" data-skill-category="ui-ux">
+                            <div class="icon-placeholder uiux-icon"></div>
+                            <h3>UI/UX Enhancement</h3>
+                            <p>Developing intuitive websites and user interfaces focused on seamless user experience and engagement.</p>
+                        </div>
+                        <div class="about-card" data-skill-category="project-mgmt">
+                            <div class="icon-placeholder project-icon"></div>
+                            <h3>Project Management</h3>
+                            <p>Leading complex AI-driven initiatives from concept to completion, ensuring timely and successful delivery.</p>
+                        </div>
+                        <div class="about-card" data-skill-category="technical-skills">
+                            <div class="icon-placeholder python-icon"></div>
+                            <h3>Technical Skills</h3>
+                            <p>Proficient in Python, Flask, Django, MongoDB, Jupyter Notebook, and VS Code for robust development.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="portfolio-section animated-section">
+            <div class="container">
+                <h2>My <span class="highlight">Portfolio</span></h2>
+                <div class="portfolio-grid">
+                    <!-- Project 1: Content Engagement Strategy -->
+                    <a href="project_content.html" class="portfolio-item-link" target="_blank">
+                        <div class="portfolio-item">
+                            <img src="https://placehold.co/400x250/0A0A0A/FFD700?text=Content+Strategy" alt="Content Strategy Thumbnail">
+                            <div class="portfolio-content">
+                                <h3>Content Engagement Strategy</h3>
+                                <p>Boosted student engagement by **30%** with personalized learning modules.</p>
+                                <div class="project-links">
+                                    <!-- This "View Project" link is now hidden by CSS as the whole card is clickable -->
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 2: AI-Powered Automation Solutions -->
+                    <a href="project_ai_automation.html" class="portfolio-item-link" target="_blank">
+                        <div class="portfolio-item">
+                            <img src="https://placehold.co/400x250/0A0A0A/FFD700?text=AI+Automation" alt="AI Automation Thumbnail">
+                            <div class="portfolio-content">
+                                <h3>AI-Powered Automation Solutions</h3>
+                                <p>Automated **75% of routine tasks**, cutting costs and halving response times.</p>
+                                <div class="project-links">
+                                    <!-- This "View Project" link is now hidden by CSS as the whole card is clickable -->
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 3: Digital Marketing & Lead Growth -->
+                    <a href="project_digital_marketing.html" class="portfolio-item-link" target="_blank">
+                        <div class="portfolio-item">
+                            <img src="https://placehold.co/400x250/0A0A0A/FFD700?text=Digital+Marketing" alt="Digital Marketing Thumbnail">
+                            <div class="portfolio-content">
+                                <h3>Digital Marketing & Lead Growth</h3>
+                                <p>Achieved **35% online engagement** and **20% revenue growth** through strategic campaigns.</p>
+                                <div class="project-links">
+                                    <!-- This "View Project" link is now hidden by CSS as the whole card is clickable -->
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 4: Academic Content Management -->
+                    <a href="project_academic_Content.html" class="portfolio-item-link" target="_blank">
+                        <div class="portfolio-item">
+                            <img src="https://placehold.co/400x250/0A0A0A/FFD700?text=Academic+Content" alt="Academic Content Thumbnail">
+                            <div class="portfolio-content">
+                                <h3>Academic Content Management</h3>
+                                <p>Managed 50+ educational content pieces, improving engagement methodologies by **30%**.</p>
+                                <div class="project-links">
+                                    <!-- This "View Project" link is now hidden by CSS as the whole card is clickable -->
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="case-study" class="case-study-section animated-section">
+            <div class="container">
+                <h2>Featured <span class="highlight">Case Study</span>: AI Solution for Enhanced System Functionality</h2>
+                <div class="section-content-box">
+                    <p><strong>Project Goal:</strong> To boost system functionality and user experience by developing and integrating tailored AI algorithms and automation.</p>
+                    <p><strong>My Role:</strong> AI-MI Developer at Talkeng Online Solution Pvt Ltd.</p>
+                    <ul>
+                        <li>Improved system functionality and user experience by **40%**, reducing human intervention by **30%**.</li>
+                        <li>Automated **75% of routine tasks** and developed an NLP chatbot, halving response times from 2 minutes to **1 minute**.</li>
+                        <li>Achieved **95% accuracy** in identifying restricted content with a dedicated AI module.</li>
+                        <li>Enhanced customer service efficiency by **25%** and operational effectiveness by **20%** using predictive analytics.</li>
+                        <li>Reduced system downtime by **15%** through real-time data analysis, boosting user satisfaction by **20%**.</li>
+                        <li>Integrated AI solutions for a **100% increase** in overall system performance and a **30% reduction** in manual errors.</li>
+                    </ul>
+                    <p><strong>Results:</strong> The AI integration profoundly impacted efficiency, user satisfaction, and business scalability.</p>
+                    <div class="hero-buttons">
+                        <a href="#portfolio" class="btn primary-btn">See All Projects</a>
+                        <a href="#contact" class="btn secondary-btn">Discuss Your Project</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Performance Dashboard Section (Projects Completions) -->
+        <section id="performance" class="performance-dashboard-section animated-section">
+            <div class="container">
+                <h2>Project <span class="highlight">Performance</span> & Client Satisfaction</h2>
+                <div class="chart-container section-content-box">
+                    <p>This chart illustrates average client satisfaction marks and project completion over key phases, demonstrating consistent quality and delivery excellence across my projects.</p>
+                    <svg id="clientMarksChart" class="main-chart-svg"></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Client Testimonials Section -->
+        <section id="testimonials" class="testimonials-section animated-section">
+            <div class="container">
+                <h2>Client <span class="highlight">Testimonials</span></h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="star-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p>"Ayan's content strategy significantly boosted our online engagement. His ability to blend creative writing with SEO expertise is truly impressive."</p>
+                        <div class="client-info">Ravi Kumar<span>CEO, Tech Solutions Inc.</span></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="star-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p>"The AI solution developed by Ayan streamlined our operations, leading to substantial cost savings and improved efficiency. Highly recommend!"</p>
+                        <div class="client-info">Priya Sharma<span>Operations Director, Global Innovations</span></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="star-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                        </div>
+                        <p>"Working with Ayan on our digital marketing campaign was a game-changer. His strategic approach led to remarkable revenue growth for our startup."</p>
+                        <div class="client-info">Amit Singh<span>Founder, Creative Minds Co.</span></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="star-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p>"Ayan's dedication to improving user experience through intuitive UI/UX design is unparalleled. Our website now looks and functions flawlessly."</p>
+                        <div class="client-info">Sarah Lee<span>Product Manager, Digital Nexus</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Tools & Technologies Section -->
+        <section id="tools" class="tools-section animated-section">
+            <div class="container">
+                <h2>My <span class="highlight">Tools & Technologies</span></h2>
+                <div class="section-content-box">
+                    <p>I leverage a diverse set of tools and technologies to streamline workflows, enhance creative processes, and analyze data for optimal outcomes. My proficiency spans across design, diagramming, AI/ML development, and data visualization platforms.</p>
+                    <div class="tools-grid about-grid"> <!-- Reusing about-grid for consistent layout -->
+                        <div class="about-card tool-card">
+                            <div class="icon-placeholder figma-icon"></div>
+                            <h3>Figma</h3>
+                            <p>Proficient in UI/UX design and prototyping, ensuring intuitive and engaging user experiences.</p>
+                        </div>
+                        <div class="about-card tool-card">
+                            <div class="icon-placeholder drawio-icon"></div>
+                            <h3>Draw.io / diagrams.net</h3>
+                            <p>Skilled in creating clear and effective flowcharts, diagrams, and visual representations for complex ideas.</p>
+                        </div>
+                        <div class="about-card tool-card">
+                            <div class="icon-placeholder eraser-icon"></div>
+                            <h3>Eraser.io</h3>
+                            <p>Utilizing collaborative online whiteboards for brainstorming, conceptualizing, and visual planning.</p>
+                        </div>
+                        <div class="about-card tool-card">
+                            <div class="icon-placeholder mermaid-icon"></div>
+                            <h3>Mermaid AI</h3>
+                            <p>Generating diagrams and flowcharts from text using Markdown-like syntax for rapid visualization.</p>
+                        </div>
+                        <div class="about-card tool-card">
+                            <div class="icon-placeholder orange-icon"></div>
+                            <h3>Orange Data Mining</h3>
+                            <p>Applying visual programming for data analysis, machine learning, and data visualization tasks.</p>
+                        </div>
+                        <div class="about-card tool-card">
+                            <div class="icon-placeholder generative-ai-icon"></div>
+                            <h3>Generative AI (Various)</h3>
+                            <p>Leveraging various generative AI tools for content creation, idea generation, and automation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="contact" class="contact-section animated-section">
+            <div class="container">
+                <h2>Get in <span class="highlight">Touch</span></h2>
+                <div class="contact-form-container section-content-box">
+                    <p style="margin-bottom: 25px; color: var(--current-text-color-primary);">Have a project in mind or just want to say hello? Let's connect and discuss how I can bring value to your next initiative.</p>
+                    <form>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        <input type="text" id="subject" name="subject" placeholder="Subject">
+                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                        <button type="submit">Send Message</button>
+                    </form>
+                    <p style="margin-top: 30px; color: var(--current-text-color-secondary);">
+                        Reach out directly: <br>
+                        Email: <a href="mailto:Ayanpal0698@gmail.com" class="highlight-link">Ayanpal0698@gmail.com</a> <br>
+                        Phone: <span style="color: var(--current-primary-color);">+91 8798610548</span> <br>
+                        LinkedIn: <a href="https://www.linkedin.com/in/ayan-pal-6ba807231" target="_blank" class="highlight-link">linkedin.com/in/ayan-pal-6ba807231</a><br>
+                        Location: Dhaleswar, Agartala, Tripura
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Ayan Pal. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Back To Top Button -->
+    <button onclick="scrollToTop()" id="backToTopBtn" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Skill Detail Modal Structure -->
+    <div id="skillDetailModal" class="skill-modal-overlay">
+        <div class="skill-modal-content">
+            <button class="close-button">&times;</button>
+            <h3 id="modalSkillTitle"></h3>
+            <div class="modal-chart-area">
+                <svg id="modalSkillChart" class="modal-chart-svg"></svg>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Page Loading Overlay ---
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (loadingOverlay) {
+                window.addEventListener('load', () => {
+                    loadingOverlay.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingOverlay.style.display = 'none';
+                    }, 500); // Give it time to fade out
+                });
+            }
+
+
+            // --- Main Performance Chart Data ---
+            const mainChartData = [
+                { period: 'Q1 2023', completion: 85, marks: 4.0 },
+                { period: 'Q2 2023', completion: 90, marks: 4.2 },
+                { period: 'Q3 2023', completion: 88, marks: 4.1 },
+                { period: 'Q4 2023', completion: 92, marks: 4.5 },
+                { period: 'Q1 2024', completion: 95, marks: 4.7 },
+                { period: 'Q2 2024', completion: 93, marks: 4.6 }
+            ];
+
+            // Hypothetical data for each skill category
+            const skillDataMap = {
+                "content-seo": {
+                    title: "Content & SEO Performance",
+                    type: "line",
+                    data: [
+                        { period: 'Q1', traffic: 15000, engagement: 45 },
+                        { period: 'Q2', traffic: 18000, engagement: 50 },
+                        { period: 'Q3', traffic: 22000, engagement: 55 },
+                        { period: 'Q4', traffic: 25000, engagement: 60 }
+                    ],
+                    lines: [
+                        { key: 'traffic', label: 'Website Traffic', color: 'var(--current-primary-color)' },
+                        { key: 'engagement', label: 'Engagement Rate (%)', color: 'var(--current-hover-effect)' }
+                    ],
+                    yLabels: ['Traffic Count', 'Engagement (%)']
+                },
+                "ai-ml": {
+                    title: "AI & ML Development Metrics",
+                    type: "line",
+                    data: [
+                        { period: 'Jan', accuracy: 85, automation: 60 },
+                        { period: 'Feb', accuracy: 88, automation: 65 },
+                        { period: 'Mar', accuracy: 92, automation: 70 },
+                        { period: 'Apr', accuracy: 95, automation: 75 }
+                    ],
+                    lines: [
+                        { key: 'accuracy', label: 'Model Accuracy (%)', color: 'var(--current-primary-color)' },
+                        { key: 'automation', label: 'Automation Rate (%)', color: 'var(--current-hover-effect)' }
+                    ],
+                    yLabels: ['Accuracy (%)', 'Automation (%)']
+                },
+                "business-dev": {
+                    title: "Business Development Growth",
+                    type: "line",
+                    data: [
+                        { period: 'H1', revenueGrowth: 10, opportunities: 5 },
+                        { period: 'H2', revenueGrowth: 15, opportunities: 8 },
+                        { period: 'H1', revenueGrowth: 20, opportunities: 12 },
+                        { period: 'H2', revenueGrowth: 25, opportunities: 15 }
+                    ],
+                    lines: [
+                        { key: 'revenueGrowth', label: 'Revenue Growth (%)', color: 'var(--current-primary-color)' },
+                        { key: 'opportunities', label: 'New Opportunities', color: 'var(--current-hover-effect)' }
+                    ],
+                    yLabels: ['Revenue Growth (%)', 'Opportunities']
+                },
+                "ui-ux": {
+                    title: "UI/UX Enhancement Impact",
+                    type: "bar", // Single bar chart for demonstration
+                    data: [
+                        { metric: 'User Satisfaction (out of 5)', value: 4.5 },
+                        { metric: 'Task Completion Time Reduction (%)', value: 20 },
+                        { metric: 'Usability Score (out of 100)', value: 88 }
+                    ],
+                    xLabel: 'Value',
+                    yLabel: 'Metric',
+                    barColor: 'var(--current-primary-color)'
+                },
+                "project-mgmt": {
+                    title: "Project Management Success Rates",
+                    type: "line",
+                    data: [
+                        { period: 'Q1', onTime: 90, budgetAdh: 95 },
+                        { period: 'Q2', onTime: 92, budgetAdh: 93 },
+                        { period: 'Q3', onTime: 95, budgetAdh: 96 },
+                        { period: 'Q4', onTime: 93, budgetAdh: 94 }
+                    ],
+                    lines: [
+                        { key: 'onTime', label: 'On-Time Delivery (%)', color: 'var(--current-primary-color)' },
+                        { key: 'budgetAdh', label: 'Budget Adherence (%)', color: 'var(--current-hover-effect)' }
+                    ],
+                    yLabels: ['Percentage (%)', 'Percentage (%)']
+                },
+                "technical-skills": {
+                    title: "Technical Skill Proficiency",
+                    type: "bar-horizontal", // Unique type for horizontal bar chart
+                    data: [
+                        { skill: 'Python', proficiency: 90 },
+                        { skill: 'Flask', proficiency: 85 },
+                        { skill: 'Django', proficiency: 80 },
+                        { skill: 'MongoDB', proficiency: 75 },
+                        { skill: 'Jupyter Notebook', proficiency: 92 },
+                        { skill: 'VS Code', proficiency: 95 }
+                    ],
+                    xLabel: 'Proficiency (%)',
+                    yLabel: 'Skill',
+                    barColor: 'var(--current-primary-color)'
+                }
+            };
+
+            // --- Main Chart Rendering Function ---
+            function renderMainChart() {
+                const margin = { top: 30, right: 30, bottom: 60, left: 60 };
+                const chartParent = document.getElementById('clientMarksChart').parentElement;
+                const parentWidth = chartParent.getBoundingClientRect().width;
+                const width = Math.max(300, parentWidth - margin.left - margin.right); // Min width for small screens
+                const height = 400 - margin.top - margin.bottom;
+
+                // Clear existing SVG to prevent re-drawing
+                d3.select("#clientMarksChart").html("");
+
+                const svg = d3.select("#clientMarksChart")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+                const x = d3.scaleBand()
+                    .domain(mainChartData.map(d => d.period))
+                    .range([0, width])
+                    .padding(0.1);
+
+                const yCompletion = d3.scaleLinear()
+                    .domain([0, 100])
+                    .range([height, 0]);
+
+                const yMarks = d3.scaleLinear()
+                    .domain([0, 5])
+                    .range([height, 0]);
+
+                svg.append("g")
+                    .attr("class", "x-axis")
+                    .attr("transform", `translate(0,${height})`)
+                    .call(d3.axisBottom(x))
+                    .selectAll("text")
+                    .attr("class", "chart-axis-label")
+                    .style("text-anchor", "middle");
+
+                svg.append("g")
+                    .attr("class", "y-axis-left")
+                    .call(d3.axisLeft(yCompletion))
+                    .selectAll("text")
+                    .attr("class", "chart-axis-label");
+
+                svg.append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", -margin.left + 15)
+                    .attr("x", -height / 2)
+                    .attr("dy", "1em")
+                    .style("text-anchor", "middle")
+                    .attr("class", "chart-axis-label")
+                    .text("Project Completion (%)");
+
+                const yAxisRight = svg.append("g")
+                    .attr("class", "y-axis-right")
+                    .attr("transform", `translate(${width},0)`)
+                    .call(d3.axisRight(yMarks))
+                    .selectAll("text")
+                    .attr("class", "chart-axis-label");
+
+                svg.append("text")
+                    .attr("transform", "rotate(90)")
+                    .attr("y", -width - margin.right + 40)
+                    .attr("x", height / 2)
+                    .attr("dy", "-1em")
+                    .style("text-anchor", "middle")
+                    .attr("class", "chart-axis-label")
+                    .text("Client Marks (out of 5)");
+
+                const lineCompletion = d3.line()
+                    .x(d => x(d.period) + x.bandwidth() / 2)
+                    .y(d => yCompletion(d.completion));
+
+                const lineMarks = d3.line()
+                    .x(d => x(d.period) + x.bandwidth() / 2)
+                    .y(d => yMarks(d.marks));
+
+                svg.append("path")
+                    .datum(mainChartData)
+                    .attr("class", "line-chart-line")
+                    .attr("d", lineCompletion);
+
+                svg.append("path")
+                    .datum(mainChartData)
+                    .attr("class", "line-chart-line")
+                    .attr("stroke", "var(--current-hover-effect)") /* Use current theme accent for second line */
+                    .attr("d", lineMarks);
+
+                const tooltip = d3.select("body").append("div")
+                    .attr("class", "tooltip")
+                    .style("opacity", 0);
+
+                svg.selectAll(".dot-completion")
+                    .data(mainChartData)
+                    .enter().append("circle")
+                    .attr("class", "line-chart-dot")
+                    .attr("cx", d => x(d.period) + x.bandwidth() / 2)
+                    .attr("cy", d => yCompletion(d.completion))
+                    .attr("r", 5)
+                    .style("fill", "var(--current-primary-color)")
+                    .on("mouseover", function(event, d) {
+                        tooltip.transition().duration(200).style("opacity", .9);
+                        tooltip.html(`Period: ${d.period}<br/>Completion: ${d.completion}%`)
+                            .style("left", (event.pageX + 10) + "px")
+                            .style("top", (event.pageY - 28) + "px");
+                    })
+                    .on("mouseout", function(d) {
+                        tooltip.transition().duration(500).style("opacity", 0);
+                    });
+
+                svg.selectAll(".dot-marks")
+                    .data(mainChartData)
+                    .enter().append("circle")
+                    .attr("class", "line-chart-dot")
+                    .attr("cx", d => x(d.period) + x.bandwidth() / 2)
+                    .attr("cy", d => yMarks(d.marks))
+                    .attr("r", 5)
+                    .style("fill", "var(--current-hover-effect)") /* Use current theme accent for second line's dots */
+                    .on("mouseover", function(event, d) {
+                        tooltip.transition().duration(200).style("opacity", .9);
+                        tooltip.html(`Period: ${d.period}<br/>Marks: ${d.marks}/5`)
+                            .style("left", (event.pageX + 10) + "px")
+                            .style("top", (event.pageY - 28) + "px");
+                    })
+                    .on("mouseout", function(d) {
+                        tooltip.transition().duration(500).style("opacity", 0);
+                    });
+
+                const legend = svg.append("g")
+                    .attr("font-family", "Poppins")
+                    .attr("font-size", 10)
+                    .attr("text-anchor", "end")
+                    .selectAll("g")
+                    .data(["Project Completion", "Client Marks"])
+                    .enter().append("g")
+                    .attr("transform", (d, i) => `translate(0,${i * 20})`);
+
+                legend.append("rect")
+                    .attr("x", width - 19)
+                    .attr("width", 19)
+                    .attr("height", 19)
+                    .attr("fill", (d, i) => i === 0 ? "var(--current-primary-color)" : "var(--current-hover-effect)");
+
+                legend.append("text")
+                    .attr("x", width - 24)
+                    .attr("y", 9.5)
+                    .attr("dy", "0.32em")
+                    .style("fill", "var(--current-text-color-secondary)")
+                    .text(d => d);
+            }
+
+            // Generic D3 Chart Renderer for Modals
+            function renderModalChart(chartDataConfig, svgElementId) {
+                const margin = { top: 30, right: 40, bottom: 50, left: 70 }; // Adjusted left margin for labels
+                const svgParent = document.getElementById(svgElementId).parentElement;
+                let containerWidth = svgParent.getBoundingClientRect().width;
+                let width = Math.max(300, containerWidth - margin.left - margin.right);
+                let height = 350 - margin.top - margin.bottom; // Default height, can be adjusted by CSS
+
+                // Clear previous chart
+                d3.select(`#${svgElementId}`).html("");
+
+                const svg = d3.select(`#${svgElementId}`)
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+                // Ensure tooltip exists outside the SVG to prevent clipping issues
+                let tooltip = d3.select("body").select(".tooltip");
+                if (tooltip.empty()) {
+                    tooltip = d3.select("body").append("div")
+                        .attr("class", "tooltip")
+                        .style("opacity", 0);
+                }
+
+
+                if (chartDataConfig.type === "line") {
+                    const x = d3.scaleBand()
+                        .domain(chartDataConfig.data.map(d => d.period))
+                        .range([0, width])
+                        .padding(0.1);
+
+                    const yLeft = d3.scaleLinear()
+                        .domain([0, d3.max(chartDataConfig.data, d => d[chartDataConfig.lines[0].key]) * 1.2])
+                        .range([height, 0]);
+
+                    const yRight = d3.scaleLinear()
+                        .domain([0, d3.max(chartDataConfig.data, d => d[chartDataConfig.lines[1].key]) * 1.2])
+                        .range([height, 0]);
+
+                    svg.append("g")
+                        .attr("class", "x-axis")
+                        .attr("transform", `translate(0,${height})`)
+                        .call(d3.axisBottom(x))
+                        .selectAll("text")
+                        .attr("class", "chart-axis-label");
+
+                    svg.append("g")
+                        .attr("class", "y-axis-left")
+                        .call(d3.axisLeft(yLeft))
+                        .selectAll("text")
+                        .attr("class", "chart-axis-label");
+
+                    svg.append("text")
+                        .attr("transform", "rotate(-90)")
+                        .attr("y", -margin.left + 15)
+                        .attr("x", -height / 2)
+                        .attr("dy", "1em")
+                        .style("text-anchor", "middle")
+                        .attr("class", "chart-axis-label")
+                        .text(chartDataConfig.yLabels[0]);
+
+                    svg.append("g")
+                        .attr("class", "y-axis-right")
+                        .attr("transform", `translate(${width},0)`)
+                        .call(d3.axisRight(yRight))
+                        .selectAll("text")
+                        .attr("class", "chart-axis-label");
+
+                    svg.append("text")
+                        .attr("transform", "rotate(90)")
+                        .attr("y", -width - margin.right + 40)
+                        .attr("x", height / 2)
+                        .attr("dy", "-1em")
+                        .style("text-anchor", "middle")
+                        .attr("class", "chart-axis-label")
+                        .text(chartDataConfig.yLabels[1]);
+
+                    chartDataConfig.lines.forEach((lineConfig, i) => {
+                        const currentYScale = (i === 0) ? yLeft : yRight;
+                        const line = d3.line()
+                            .x(d => x(d.period) + x.bandwidth() / 2)
+                            .y(d => currentYScale(d[lineConfig.key]));
+
+                        svg.append("path")
+                            .datum(chartDataConfig.data)
+                            .attr("class", `line-chart-line line-${lineConfig.key}`)
+                            .attr("stroke", lineConfig.color)
+                            .attr("d", line);
+
+                        svg.selectAll(`.dot-${lineConfig.key}`)
+                            .data(chartDataConfig.data)
+                            .enter().append("circle")
+                            .attr("class", `line-chart-dot dot-${lineConfig.key}`)
+                            .attr("cx", d => x(d.period) + x.bandwidth() / 2)
+                            .attr("cy", d => currentYScale(d[lineConfig.key]))
+                            .attr("r", 5)
+                            .style("fill", lineConfig.color)
+                            .on("mouseover", function(event, d) {
+                                tooltip.transition().duration(200).style("opacity", .9);
+                                tooltip.html(`Period: ${d.period}<br/>${lineConfig.label}: ${d[lineConfig.key]}`)
+                                    .style("left", (event.pageX + 10) + "px")
+                                    .style("top", (event.pageY - 28) + "px");
+                            })
+                            .on("mouseout", function(d) {
+                                tooltip.transition().duration(500).style("opacity", 0);
+                            });
+                    });
+
+                    // Legend for line charts
+                    const legend = svg.append("g")
+                        .attr("font-family", "Poppins")
+                        .attr("font-size", 10)
+                        .attr("text-anchor", "end")
+                        .selectAll("g")
+                        .data(chartDataConfig.lines)
+                        .enter().append("g")
+                        .attr("transform", (d, i) => `translate(0,${i * 20})`);
+
+                    legend.append("rect")
+                        .attr("x", width - 19)
+                        .attr("width", 19)
+                        .attr("height", 19)
+                        .attr("fill", d => d.color);
+
+                    legend.append("text")
+                        .attr("x", width - 24)
+                        .attr("y", 9.5)
+                        .attr("dy", "0.32em")
+                        .style("fill", "var(--current-text-color-secondary)")
+                        .text(d => d.label);
+
+                } else if (chartDataConfig.type === "bar-horizontal") {
+                    // For horizontal bar chart (like technical skills proficiency)
+                    const y = d3.scaleBand()
+                        .domain(chartDataConfig.data.map(d => d.skill))
+                        .range([0, height])
+                        .padding(0.2);
+
+                    const x = d3.scaleLinear()
+                        .domain([0, 100]) // Proficiency is 0-100
+                        .range([0, width]);
+
+                    svg.append("g")
+                        .attr("class", "y-axis-skills")
+                        .call(d3.axisLeft(y).tickSize(0))
+                        .selectAll("text")
+                        .attr("class", "bar-label")
+                        .style("font-weight", "bold");
+
+                    svg.append("g")
+                        .attr("class", "x-axis-skills")
+                        .attr("transform", `translate(0,${height})`)
+                        .call(d3.axisBottom(x).ticks(5).tickFormat(d => d + '%'))
+                        .selectAll("text")
+                        .attr("class", "chart-axis-label");
+
+                    svg.selectAll(".bar")
+                        .data(chartDataConfig.data)
+                        .enter().append("rect")
+                        .attr("class", "bar-chart-bar")
+                        .attr("y", d => y(d.skill))
+                        .attr("height", y.bandwidth())
+                        .attr("x", 0)
+                        .attr("width", d => x(d.proficiency))
+                        .style("fill", chartDataConfig.barColor)
+                        .on("mouseover", function(event, d) {
+                            tooltip.transition().duration(200).style("opacity", .9);
+                            tooltip.html(`${d.skill}: ${d.proficiency}%`)
+                                .style("left", (event.pageX + 10) + "px")
+                                .style("top", (event.pageY - 28) + "px");
+                        })
+                        .on("mouseout", function(d) {
+                            tooltip.transition().duration(500).style("opacity", 0);
+                        });
+
+                    svg.selectAll(".bar-text")
+                        .data(chartDataConfig.data)
+                        .enter().append("text")
+                        .attr("class", "bar-value")
+                        .attr("y", d => y(d.skill) + y.bandwidth() / 2)
+                        .attr("x", d => x(d.proficiency) + 5)
+                        .attr("dy", "0.35em")
+                        .text(d => d.proficiency + '%')
+                        .style("fill", "var(--current-text-color-primary)");
+
+                } else if (chartDataConfig.type === "bar") {
+                    // For vertical bar chart (like UI/UX metrics)
+                    const x = d3.scaleBand()
+                        .domain(chartDataConfig.data.map(d => d.metric))
+                        .range([0, width])
+                        .padding(0.3);
+
+                    const y = d3.scaleLinear()
+                        .domain([0, d3.max(chartDataConfig.data, d => d.value) * 1.2]) // Adjusted domain
+                        .range([height, 0]);
+
+                    svg.append("g")
+                        .attr("class", "x-axis")
+                        .attr("transform", `translate(0,${height})`)
+                        .call(d3.axisBottom(x))
+                        .selectAll("text")
+                        .attr("class", "chart-axis-label")
+                        .attr("transform", "rotate(-15)")
+                        .style("text-anchor", "end"); // Rotate labels for readability
+
+                    svg.append("g")
+                        .attr("class", "y-axis-left")
+                        .call(d3.axisLeft(y))
+                        .selectAll("text")
+                        .attr("class", "chart-axis-label");
+
+                    svg.selectAll(".bar")
+                        .data(chartDataConfig.data)
+                        .enter().append("rect")
+                        .attr("class", "bar-chart-bar")
+                        .attr("x", d => x(d.metric))
+                        .attr("y", d => y(d.value))
+                        .attr("width", x.bandwidth())
+                        .attr("height", d => height - y(d.value))
+                        .style("fill", chartDataConfig.barColor)
+                        .on("mouseover", function(event, d) {
+                            tooltip.transition().duration(200).style("opacity", .9);
+                            tooltip.html(`${d.metric}: ${d.value}`)
+                                .style("left", (event.pageX + 10) + "px")
+                                .style("top", (event.pageY - 28) + "px");
+                        })
+                        .on("mouseout", function(d) {
+                            tooltip.transition().duration(500).style("opacity", 0);
+                        });
+
+                    svg.selectAll(".bar-value")
+                        .data(chartDataConfig.data)
+                        .enter().append("text")
+                        .attr("class", "bar-value")
+                        .attr("x", d => x(d.metric) + x.bandwidth() / 2)
+                        .attr("y", d => y(d.value) - 5)
+                        .attr("text-anchor", "middle")
+                        .text(d => d.value)
+                        .style("fill", "var(--current-text-color-primary)");
+
+                }
+            }
+
+            // --- Theme Toggle Logic ---
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const sunIcon = themeToggleBtn.querySelector('.fa-sun');
+            const moonIcon = themeToggleBtn.querySelector('.fa-moon');
+            const body = document.body;
+
+            // --- Skill Detail Modal Elements ---
+            const skillDetailModal = document.getElementById('skillDetailModal');
+            const closeModalButton = skillDetailModal.querySelector('.close-button');
+            const modalSkillTitle = document.getElementById('modalSkillTitle');
+            const modalSkillChart = document.getElementById('modalSkillChart');
+            const aboutCards = document.querySelectorAll('.about-card');
+
+
+            // Function to set theme
+            function setTheme(theme) {
+                body.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                if (theme === 'dark') {
+                    sunIcon.style.display = 'none';
+                    moonIcon.style.display = 'inline-block';
+                } else {
+                    sunIcon.style.display = 'inline-block';
+                    moonIcon.style.display = 'none';
+                }
+                // Re-render charts to pick up new theme colors
+                renderMainChart();
+                if (skillDetailModal.classList.contains('active')) {
+                    const originalSkillCategory = Object.keys(skillDataMap).find(key => skillDataMap[key].title === modalSkillTitle.textContent);
+                    if (originalSkillCategory) {
+                        renderModalChart(skillDataMap[originalSkillCategory], 'modalSkillChart');
+                    }
+                }
+            }
+
+            // Check for saved theme preference on load
+            const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark if no preference
+            setTheme(savedTheme);
+
+            // Toggle theme on button click
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = body.getAttribute('data-theme');
+                setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+            });
+
+
+            // --- Scroll-triggered Animations ---
+            const animatedSections = document.querySelectorAll('.animated-section');
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Stop observing once visible
+                    }
+                });
+            }, {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.2 // Trigger when 20% of the section is visible
+            });
+
+            animatedSections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+
+            // --- Custom Cursor Logic ---
+            const customCursor = document.querySelector('.custom-cursor');
+            const interactiveElements = 'a, button, input, textarea, .about-card, .portfolio-item, .testimonial-card, .tool-card'; // Added tool-card
+
+            // Only show custom cursor on non-mobile devices
+            if (window.innerWidth > 768) {
+                document.body.classList.add('has-custom-cursor'); // Add class to body to display cursor
+
+                document.addEventListener('mousemove', (e) => {
+                    customCursor.style.left = e.clientX + 'px';
+                    customCursor.style.top = e.clientY + 'px';
+                });
+
+                document.addEventListener('mouseover', (e) => {
+                    if (e.target.closest(interactiveElements)) {
+                        customCursor.classList.add('active');
+                    }
+                });
+
+                document.addEventListener('mouseout', (e) => {
+                    if (e.target.closest(interactiveElements)) {
+                        customCursor.classList.remove('active');
+                    }
+                });
+            }
+
+
+            // --- Hero Section Parallax (simple JS for background) ---
+            const heroSection = document.getElementById('home');
+            // The `heroPseudoElement` variable from previous code needs to be adjusted
+            // because direct JS manipulation of pseudo-elements is not straightforward.
+            // We'll rely on CSS variables for parallax effect based on mouse move.
+            if (heroSection) {
+                heroSection.addEventListener('mousemove', (e) => {
+                    const rect = heroSection.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+
+                    const offsetX = (e.clientX - centerX) * 0.05; // Adjust sensitivity
+                    const offsetY = (e.clientY - centerY) * 0.05; // Adjust sensitivity
+
+                    // Apply a subtle translation to the hero section itself for the parallax effect
+                    // The ::before pseudo-element's transform is already defined to react to these.
+                    heroSection.style.setProperty('--hero-bg-transform-x', `${-offsetX}px`);
+                    heroSection.style.setProperty('--hero-bg-transform-y', `${-offsetY}px`);
+                });
+            }
+            // Ensure the CSS for --hero-bg-transform-x/y is present in the style block
+            // (it was commented out in previous version's thought process, now explicitly adding here)
+            // This CSS rule is added inside the <style> tag at the top.
+
+
+            // Intersection Observer for active navigation links
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => link.classList.remove('active'));
+                        const currentNavLink = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+                        if (currentNavLink) {
+                            currentNavLink.classList.add('active');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Initial render of the main chart
+            renderMainChart();
+
+            // Responsive resize for main chart
+            window.addEventListener('resize', renderMainChart);
+
+            // Event listeners for "What I Do" cards
+            aboutCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const skillCategory = this.dataset.skillCategory;
+                    const skillData = skillDataMap[skillCategory];
+
+                    if (skillData) {
+                        modalSkillTitle.textContent = skillData.title;
+                        renderModalChart(skillData, 'modalSkillChart');
+                        skillDetailModal.classList.add('active');
+                    }
+                });
+            });
+
+            // Close modal functionality
+            closeModalButton.addEventListener('click', function() {
+                skillDetailModal.classList.remove('active');
+                d3.select("body").selectAll(".tooltip").remove(); // Remove tooltip on close
+            });
+
+            // Close modal if clicked outside content
+            skillDetailModal.addEventListener('click', function(event) {
+                if (event.target === skillDetailModal) {
+                    skillDetailModal.classList.remove('active');
+                    d3.select("body").selectAll(".tooltip").remove(); // Remove tooltip on close
+                }
+            });
+
+            // Responsive chart rendering for modal
+            window.addEventListener('resize', function() {
+                if (skillDetailModal.classList.contains('active')) {
+                    const originalSkillCategory = Object.keys(skillDataMap).find(key => skillDataMap[key].title === modalSkillTitle.textContent);
+                     if (originalSkillCategory) {
+                        renderModalChart(skillDataMap[originalSkillCategory], 'modalSkillChart');
+                     }
+                }
+            });
+
+            // --- Back To Top Button Logic ---
+            const backToTopBtn = document.getElementById('backToTopBtn');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) { // Show button after scrolling 300px
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+        });
+
+        // Function for smooth scroll to top (outside DOMContentLoaded for global access from onclick)
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

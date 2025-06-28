@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Digital Marketing & Lead Growth</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #8c7ae6; /* Soft purple */
+            --secondary-color: #bbbbbb; /* Light grey text */
+            --dark-bg-deep: #1a0f3d; /* Very deep dark purple */
+            --dark-bg-deep-rgb: 26, 15, 61; /* RGB components for deep dark purple */
+            --dark-bg-mid: #2b1a50; /* Mid-tone dark purple */
+            --dark-bg-light: #3e2e6a; /* Lighter dark purple */
+            --text-color-primary: #ffffff; /* White text for main content */
+            --text-color-secondary: #cccccc; /* Slightly darker white for secondary text */
+            --glass-blur: 15px; /* Blur strength */
+            --glass-bg-opacity: 0.4; /* Opacity for glassmorphism background */
+            --glass-border-opacity: 0.15; /* Opacity for glassmorphism border */
+            --shadow-color: rgba(0, 0, 0, 0.4); /* Darker shadow for dark theme */
+            --hover-effect: #6f5fcf; /* Brighter purple for hover */
+            --transition-speed: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, var(--dark-bg-deep) 0%, var(--dark-bg-mid) 100%);
+            color: var(--text-color-primary);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .sub-page-header {
+            background-color: rgba(var(--dark-bg-deep-rgb), 0.7);
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+            box-shadow: 0 2px 15px var(--shadow-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .sub-page-header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-left: 20px;
+        }
+        .sub-page-header .back-link {
+            margin-right: 20px;
+            padding: 8px 15px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color var(--transition-speed);
+        }
+        .sub-page-header .back-link:hover {
+            background-color: var(--hover-effect);
+        }
+
+        .project-detail-section {
+            padding: 80px 40px;
+            background: linear-gradient(135deg, var(--dark-bg-mid) 0%, var(--dark-bg-deep) 100%);
+        }
+
+        .project-detail-box {
+            background: rgba(var(--dark-bg-light-rgb), 0.6);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+            border-radius: 15px;
+            padding: 40px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            max-width: 900px;
+            text-align: left;
+        }
+
+        .project-detail-box h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .project-detail-box p {
+            font-size: 1.05rem;
+            color: var(--text-color-secondary);
+            margin-bottom: 20px;
+        }
+        .project-detail-box ul {
+            list-style: disc;
+            margin: 20px 0 30px 25px;
+            color: var(--text-color-secondary);
+        }
+        .project-detail-box ul li {
+            margin-bottom: 10px;
+        }
+        .project-detail-box strong {
+            color: var(--primary-color);
+        }
+
+        /* Chart Specific Styles (General for line charts) */
+        .chart-container {
+            margin-top: 40px;
+            background: rgba(var(--dark-bg-deep-rgb), 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+        }
+        .chart-container h3 {
+            color: var(--text-color-primary);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        #projectChart {
+            width: 100%;
+            height: 350px;
+            display: block;
+        }
+        .chart-axis-label {
+            fill: var(--text-color-secondary) !important;
+            font-size: 0.85em;
+        }
+        .line-chart-line {
+            fill: none;
+            stroke: var(--primary-color);
+            stroke-width: 3px;
+        }
+        /* For line chart animation */
+        .line-chart-line.animated {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 2s linear forwards;
+        }
+        .line-chart-line.animated.line-leads {
+            animation-delay: 0.5s;
+        }
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .line-chart-dot {
+            fill: var(--primary-color);
+            stroke: #fff;
+            stroke-width: 1.5px;
+            cursor: pointer;
+            opacity: 0;
+            transform: scale(0);
+            animation: popIn 0.5s ease-out forwards;
+        }
+        .line-chart-dot.dot-leads {
+            animation-delay: 2.0s;
+        }
+        .line-chart-dot.dot-engagement {
+            animation-delay: 1.5s;
+        }
+        .line-chart-dot:nth-child(even) { animation-delay: 1.7s; }
+        .line-chart-dot:nth-child(odd) { animation-delay: 1.9s; }
+
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0); }
+            70% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: auto;
+            height: auto;
+            padding: 8px;
+            font: 12px sans-serif;
+            background: rgba(0,0,0,0.8);
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+            color: #fff;
+            opacity: 0;
+            transition: opacity 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        /* Skills Bar Chart Specific Styles */
+        .skills-chart-container {
+            margin-top: 40px;
+            background: rgba(var(--dark-bg-deep-rgb), 0.5); /* Similar background to other charts */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+        }
+        .skills-chart-container h3 {
+            color: var(--text-color-primary);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        #skillsChart {
+            width: 100%;
+            height: 250px; /* Adjust height for skills bar chart */
+            display: block;
+        }
+        .skill-bar {
+            fill: var(--primary-color);
+            transition: fill 0.3s ease;
+            opacity: 0;
+            transform: scaleX(0);
+            transform-origin: left center;
+            animation: drawBar 1s ease-out forwards;
+        }
+        .skill-bar:hover {
+            fill: var(--hover-effect);
+        }
+        @keyframes drawBar {
+            from { opacity: 0; transform: scaleX(0); }
+            to { opacity: 1; transform: scaleX(1); }
+        }
+        .skill-label {
+            fill: var(--text-color-secondary);
+            font-size: 0.9em;
+            text-anchor: end;
+        }
+        .skill-value {
+            fill: var(--text-color-primary);
+            font-size: 0.8em;
+            text-anchor: start;
+        }
+
+        @media (max-width: 768px) {
+            .sub-page-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .project-detail-section {
+                padding: 40px 20px;
+            }
+            .project-detail-box {
+                padding: 25px;
+            }
+            .project-detail-box h1 {
+                font-size: 2rem;
+            }
+            .project-detail-box p {
+                font-size: 0.95rem;
+            }
+            #projectChart {
+                height: 250px;
+            }
+            #skillsChart {
+                height: 200px;
+            }
+            .skill-label, .skill-value {
+                font-size: 0.75em;
+            }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+</head>
+<body>
+    <header class="sub-page-header">
+        <div class="logo">Ayan Pal</div>
+        <a href="portfolio.html" class="back-link">← Back to Portfolio</a>
+    </header>
+
+    <section class="project-detail-section">
+        <div class="container">
+            <div class="project-detail-box">
+                <h1>Digital Marketing & Lead Growth</h1>
+                <p><strong>Project Goal:</strong> To significantly expand online presence, boost user engagement, and drive quantifiable lead generation and revenue growth through targeted digital marketing campaigns.</p>
+                <p><strong>My Role:</strong> Digital Marketing Strategist & Business Development Lead.</p>
+                <p><strong>Challenge:</strong> The client's digital footprint was minimal, leading to low brand visibility, stagnant online engagement, and insufficient lead generation to meet ambitious growth targets. A comprehensive and data-driven marketing strategy was required.</p>
+                <p><strong>Solution:</strong> I designed and executed a multi-faceted digital marketing strategy, leveraging various channels and analytical insights:</p>
+                <ul>
+                    <li>Developed and launched targeted social media campaigns and content marketing initiatives, tailored to specific audience segments.</li>
+                    <li>Implemented SEO best practices, including keyword research and content optimization, to improve organic search rankings.</li>
+                    <li>Managed and optimized paid advertising campaigns (PPC) across platforms like Google Ads and social media, ensuring high ROI.</li>
+                    <li>Utilized advanced analytics tools to monitor campaign performance, identify trends, and make data-driven adjustments for continuous improvement.</li>
+                    <li>Engaged directly with potential clients through digital channels, building relationships and understanding market needs to identify new business opportunities.</li>
+                </ul>
+                <p><strong>Results:</strong> The campaigns delivered impressive, measurable outcomes:</p>
+                <ul>
+                    <li>Online engagement increased by **35%**, indicating stronger audience interaction.</li>
+                    <li>Social media followers grew by **40%**, significantly expanding brand reach.</li>
+                    <li>Successfully identified and pursued **15+ new business opportunities**, leading to a **25% increase in qualified leads**.</li>
+                    <li>Conversion rates improved by **30%**, turning more leads into customers.</li>
+                    <li>Contributed directly to a **20% overall revenue growth** for the client within the project period.</li>
+                </ul>
+                <p>This project highlights my capability to drive impactful digital marketing initiatives that translate directly into business growth and enhanced online brand presence.</p>
+
+                <div class="chart-container">
+                    <h3>Engagement & Lead Growth</h3>
+                    <svg id="projectChart"></svg>
+                </div>
+
+                <div class="skills-chart-container">
+                    <h3>Key Skills Utilized</h3>
+                    <svg id="skillsChart"></svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Main Project Chart Data
+            const projectChartData = [
+                { month: 'Jul', engagement: 50, leads: 10 },
+                { month: 'Aug', engagement: 55, leads: 12 },
+                { month: 'Sep', engagement: 65, leads: 18 },
+                { month: 'Oct', engagement: 70, leads: 22 },
+                { month: 'Nov', engagement: 80, leads: 28 },
+                { month: 'Dec', engagement: 85, leads: 35 }
+            ];
+
+            // Skills Data for this specific project
+            const skillsData = [
+                { skill: 'Digital Marketing', proficiency: 90 },
+                { skill: 'SEO Optimization', proficiency: 88 },
+                { skill: 'Lead Generation', proficiency: 85 },
+                { skill: 'Content Marketing', proficiency: 80 },
+                { skill: 'Google Analytics', proficiency: 75 }
+            ];
+
+            // Main Project Chart Rendering Function
+            function renderProjectChart() {
+                const margin = { top: 20, right: 40, bottom: 50, left: 50 };
+                const parentElement = document.getElementById('projectChart').parentElement;
+                let containerWidth = parentElement.getBoundingClientRect().width;
+                let width = Math.max(250, containerWidth - margin.left - margin.right);
+                const height = 350 - margin.top - margin.bottom;
+
+                d3.select("#projectChart").html(""); // Clear previous chart
+
+                const svg = d3.select("#projectChart")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+                const x = d3.scaleBand()
+                    .domain(projectChartData.map(d => d.month))
+                    .range([0, width])
+                    .padding(0.1);
+
+                const yEngagement = d3.scaleLinear()
+                    .domain([0, 100])
+                    .range([height, 0]);
+
+                const yLeads = d3.scaleLinear()
+                    .domain([0, d3.max(projectChartData, d => d.leads) * 1.2]) // Max leads + 20% for padding
+                    .range([height, 0]);
+
+                svg.append("g")
+                    .attr("class", "x-axis")
+                    .attr("transform", `translate(0,${height})`)
+                    .call(d3.axisBottom(x))
+                    .selectAll("text")
+                    .attr("class", "chart-axis-label");
+
+                svg.append("g")
+                    .attr("class", "y-axis-left")
+                    .call(d3.axisLeft(yEngagement))
+                    .selectAll("text")
+                    .attr("class", "chart-axis-label");
+
+                svg.append("text")
+                    .attr("class", "y-axis-label-left")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", -margin.left + 15)
+                    .attr("x", -height / 2)
+                    .attr("dy", "1em")
+                    .style("text-anchor", "middle")
+                    .attr("class", "chart-axis-label")
+                    .text("Engagement (%)");
+
+                const yAxisRight = svg.append("g")
+                    .attr("class", "y-axis-right")
+                    .attr("transform", `translate(${width},0)`)
+                    .call(d3.axisRight(yLeads).tickFormat(d3.format("d"))) // Integer format for leads
+                    .selectAll("text")
+                    .attr("class", "chart-axis-label");
+
+                svg.append("text")
+                    .attr("class", "y-axis-label-right")
+                    .attr("transform", "rotate(90)")
+                    .attr("y", -width - margin.right + 40)
+                    .attr("x", height / 2)
+                    .attr("dy", "-1em")
+                    .style("text-anchor", "middle")
+                    .attr("class", "chart-axis-label")
+                    .text("Leads Generated");
+
+                const lineEngagement = d3.line()
+                    .x(d => x(d.month) + x.bandwidth() / 2)
+                    .y(d => yEngagement(d.engagement));
+
+                const lineLeads = d3.line()
+                    .x(d => x(d.month) + x.bandwidth() / 2)
+                    .y(d => yLeads(d.leads));
+
+                const pathEngagement = svg.append("path")
+                    .datum(projectChartData)
+                    .attr("class", "line-chart-line line-engagement animated")
+                    .attr("d", lineEngagement);
+
+                const pathLeads = svg.append("path")
+                    .datum(projectChartData)
+                    .attr("class", "line-chart-line line-leads animated")
+                    .attr("stroke", "#ff5722")
+                    .attr("d", lineLeads);
+
+                const totalLengthEngagement = pathEngagement.node().getTotalLength();
+                const totalLengthLeads = pathLeads.node().getTotalLength();
+
+                pathEngagement
+                    .attr("stroke-dasharray", totalLengthEngagement + " " + totalLengthEngagement)
+                    .attr("stroke-dashoffset", totalLengthEngagement)
+                    .transition()
+                    .duration(1500)
+                    .ease(d3.easeLinear)
+                    .attr("stroke-dashoffset", 0);
+
+                pathLeads
+                    .attr("stroke-dasharray", totalLengthLeads + " " + totalLengthLeads)
+                    .attr("stroke-dashoffset", totalLengthLeads)
+                    .transition()
+                    .duration(1500)
+                    .ease(d3.easeLinear)
+                    .delay(500)
+                    .attr("stroke-dashoffset", 0);
+
+                const tooltip = d3.select("body").append("div")
+                    .attr("class", "tooltip")
+                    .style("opacity", 0);
+
+                svg.selectAll(".dot-engagement")
+                    .data(projectChartData)
+                    .enter().append("circle")
+                    .attr("class", "line-chart-dot dot-engagement")
+                    .attr("cx", d => x(d.month) + x.bandwidth() / 2)
+                    .attr("cy", d => yEngagement(d.engagement))
+                    .attr("r", 5)
+                    .style("fill", "var(--primary-color)")
+                    .style("opacity", 0)
+                    .attr("transform", "scale(0)")
+                    .transition()
+                    .delay((d, i) => 1800 + i * 100)
+                    .duration(500)
+                    .ease(d3.easeBackOut)
+                    .style("opacity", 1)
+                    .attr("transform", "scale(1)")
+                    .on("end", function() {
+                         d3.select(this)
+                            .on("mouseover", function(event, d) {
+                                tooltip.transition().duration(200).style("opacity", .9);
+                                tooltip.html(`Month: ${d.month}<br/>Engagement: ${d.engagement}%`)
+                                    .style("left", (event.pageX + 10) + "px")
+                                    .style("top", (event.pageY - 28) + "px");
+                            })
+                            .on("mouseout", function(d) {
+                                tooltip.transition().duration(500).style("opacity", 0);
+                            });
+                    });
+
+                svg.selectAll(".dot-leads")
+                    .data(projectChartData)
+                    .enter().append("circle")
+                    .attr("class", "line-chart-dot dot-leads")
+                    .attr("cx", d => x(d.month) + x.bandwidth() / 2)
+                    .attr("cy", d => yLeads(d.leads))
+                    .attr("r", 5)
+                    .style("fill", "#ff5722")
+                    .style("opacity", 0)
+                    .attr("transform", "scale(0)")
+                    .transition()
+                    .delay((d, i) => 2100 + i * 100)
+                    .duration(500)
+                    .ease(d3.easeBackOut)
+                    .style("opacity", 1)
+                    .attr("transform", "scale(1)")
+                    .on("end", function() {
+                         d3.select(this)
+                            .on("mouseover", function(event, d) {
+                                tooltip.transition().duration(200).style("opacity", .9);
+                                tooltip.html(`Month: ${d.month}<br/>Leads: ${d.leads}`)
+                                    .style("left", (event.pageX + 10) + "px")
+                                    .style("top", (event.pageY - 28) + "px");
+                            })
+                            .on("mouseout", function(d) {
+                                tooltip.transition().duration(500).style("opacity", 0);
+                            });
+                    });
+
+                // Legend
+                const legend = svg.append("g")
+                    .attr("font-family", "Poppins")
+                    .attr("font-size", 10)
+                    .attr("text-anchor", "end")
+                    .selectAll("g")
+                    .data(["Engagement (%)", "Leads Generated"])
+                    .enter().append("g")
+                    .attr("transform", (d, i) => `translate(0,${i * 20})`);
+
+                legend.append("rect")
+                    .attr("x", width - 19)
+                    .attr("width", 19)
+                    .attr("height", 19)
+                    .attr("fill", (d, i) => i === 0 ? "var(--primary-color)" : "#ff5722");
+
+                legend.append("text")
+                    .attr("x", width - 24)
+                    .attr("y", 9.5)
+                    .attr("dy", "0.32em")
+                    .style("fill", "var(--text-color-secondary)")
+                    .text(d => d);
+            }
+
+            // Skills Chart Rendering Function
+            function renderSkillsChart() {
+                const margin = { top: 20, right: 30, bottom: 20, left: 120 }; // More left margin for skill names
+                const parentElement = document.getElementById('skillsChart').parentElement;
+                let containerWidth = parentElement.getBoundingClientRect().width;
+                let width = Math.max(250, containerWidth - margin.left - margin.right);
+                const height = 250 - margin.top - margin.bottom;
+
+                d3.select("#skillsChart").html(""); // Clear previous chart
+
+                const svg = d3.select("#skillsChart")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+                const y = d3.scaleBand()
+                    .domain(skillsData.map(d => d.skill))
+                    .range([0, height])
+                    .padding(0.2);
+
+                const x = d3.scaleLinear()
+                    .domain([0, 100])
+                    .range([0, width]);
+
+                svg.append("g")
+                    .attr("class", "y-axis-skills")
+                    .call(d3.axisLeft(y).tickSize(0)) // No tick marks
+                    .selectAll("text")
+                    .attr("class", "skill-label")
+                    .style("font-weight", "bold");
+
+                svg.append("g")
+                    .attr("class", "x-axis-skills")
+                    .attr("transform", `translate(0,${height})`)
+                    .call(d3.axisBottom(x).ticks(5).tickFormat(d => d + '%'))
+                    .selectAll("text")
+                    .attr("class", "chart-axis-label");
+
+                svg.selectAll(".bar")
+                    .data(skillsData)
+                    .enter().append("rect")
+                    .attr("class", "skill-bar")
+                    .attr("y", d => y(d.skill))
+                    .attr("height", y.bandwidth())
+                    .attr("x", 0)
+                    .attr("width", 0)
+                    .transition()
+                    .delay((d, i) => i * 150)
+                    .duration(1000)
+                    .attr("width", d => x(d.proficiency));
+
+                svg.selectAll(".bar-text")
+                    .data(skillsData)
+                    .enter().append("text")
+                    .attr("class", "skill-value")
+                    .attr("y", d => y(d.skill) + y.bandwidth() / 2)
+                    .attr("x", 0)
+                    .attr("dy", "0.35em")
+                    .text(d => d.proficiency + '%')
+                    .style("opacity", 0)
+                    .transition()
+                    .delay((d, i) => i * 150 + 1000)
+                    .duration(500)
+                    .attr("x", d => x(d.proficiency) + 5)
+                    .style("opacity", 1);
+            }
+
+            // Initial render of charts
+            renderProjectChart();
+            renderSkillsChart();
+
+            // Responsive resize for both charts
+            window.addEventListener('resize', function() {
+                renderProjectChart();
+                renderSkillsChart();
+            });
+        });
+    </script>
+</body>
+</html>
