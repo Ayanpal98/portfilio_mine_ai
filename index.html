@@ -93,7 +93,7 @@
             --current-card-bg-base: var(--light-card-bg-base);
             --current-hover-effect: var(--light-hover-effect);
             --current-shadow-color: var(--light-shadow-color);
-            --current-glow-color: var(--light-glow-color);
+            --light-glow-color: rgba(106, 76, 255, 0.4);
             --light-hero-overlay-color: rgba(255, 255, 255, 0.7); /* Light overlay */
         }
 
@@ -264,13 +264,28 @@
             transform: scale(1.1) rotate(15deg);
         }
 
+        /* Hamburger Menu Button */
+        .hamburger-menu {
+            display: none; /* Hidden by default */
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--current-primary-color);
+            cursor: pointer;
+            z-index: 1001; /* Above other nav items */
+            transition: color 0.3s ease;
+        }
+        .hamburger-menu:hover {
+            color: var(--current-hover-effect);
+        }
+
 
         /* Hero Section */
         .hero-section {
             min-height: calc(100vh - 80px);
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: space-around; /* Distribute space between content and image */
             padding: 40px;
             position: relative;
             background: linear-gradient(135deg, var(--current-bg-deep) 0%, var(--current-bg-mid) 100%);
@@ -326,6 +341,36 @@
         .hero-buttons {
             display: flex;
             gap: 15px;
+        }
+
+        /* Hero Image Container for 3D Canvas */
+        .hero-image-container {
+            position: relative;
+            z-index: 2;
+            width: 300px; /* Base width for the 3D canvas */
+            height: 300px; /* Base height for the 3D canvas */
+            margin-left: 50px;
+            animation: fadeIn 1.2s ease-out 1s forwards;
+            opacity: 0;
+            flex-shrink: 0;
+            /* Styling for the container to give it a visual presence */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px var(--current-primary-color);
+            transition: box-shadow 0.3s ease;
+            overflow: hidden; /* Ensure 3D content stays within bounds */
+        }
+
+        .hero-image-container:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--current-hover-effect);
+        }
+
+        /* Canvas inside the container */
+        #threeJsCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px; /* Apply rounded corners to canvas as well */
+            cursor: grab; /* Indicate draggable */
         }
 
         /* Styled Buttons */
@@ -395,7 +440,6 @@
             padding: 40px;
             margin: 0 auto;
             box-shadow: 0 10px 30px var(--current-shadow-color);
-            max-width: 900px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .section-content-box:hover {
@@ -656,7 +700,7 @@
             height: 400px;
             display: block;
         }
-        /* Style for D3 generated elements if needed (e.g. axis labels) */
+        /* Style for D3 generated elements if needed (e.e.g. axis labels) */
         .chart-axis-label {
             fill: var(--current-text-color-secondary) !important;
             font-size: 0.9em;
@@ -815,7 +859,7 @@
             box-shadow: 0 10px 30px var(--current-shadow-color);
         }
 
-        .contact-form-container form {
+        .contact-form-container form { /* This is now .contact-form-container div */
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -878,6 +922,34 @@
         .highlight-link:hover {
             color: var(--current-hover-effect);
         }
+
+        /* Message Box for form submissions */
+        .message-box {
+            background-color: rgba(var(--current-bg-light-rgb), 0.9);
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            color: var(--current-text-color-primary);
+        }
+        .message-box.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .message-box.success {
+            border: 1px solid #4CAF50; /* Green border */
+            background-color: rgba(76, 175, 80, 0.2); /* Green tint */
+        }
+        .message-box.error {
+            border: 1px solid #F44336; /* Red border */
+            background-color: rgba(244, 67, 54, 0.2); /* Red tint */
+        }
+
 
         /* Footer Styling */
         footer {
@@ -950,6 +1022,17 @@
 
         /* Responsive Design */
         @media (max-width: 992px) {
+            .hero-section {
+                flex-direction: column; /* Stack content and image vertically */
+                justify-content: center;
+                text-align: center;
+                padding: 40px 20px;
+            }
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+                margin-bottom: 40px; /* Space between text and image */
+            }
             .hero-content h1 {
                 font-size: 3rem;
             }
@@ -957,12 +1040,13 @@
                 font-size: 1.1rem;
             }
             .hero-buttons {
-                justify-content: flex-start;
+                justify-content: center; /* Center buttons when stacked */
+                flex-direction: row; /* Keep buttons in a row on smaller tablet */
             }
-            .hero-section {
-                padding-left: 20px;
-                padding-right: 20px;
-                justify-content: center;
+            .hero-image-container {
+                margin-left: 0; /* Remove left margin */
+                width: 250px; /* Adjust size for tablet */
+                height: 250px;
             }
 
             h2 {
@@ -983,7 +1067,7 @@
                 padding: 30px;
             }
             /* Modal adjustments for smaller screens */
-            .skill-modal-content {
+            .skill-modal-content, .survey-modal-content { /* Apply to both modals */
                 width: 95%;
                 margin: 20px auto;
                 padding: 25px;
@@ -999,20 +1083,63 @@
             }
             .navbar {
                 padding: 0.8rem 0;
-                justify-content: center;
+                /* Adjust to allow hamburger menu and logo to be on the same line */
+                flex-wrap: wrap; /* Allow wrapping if items are too wide */
+                justify-content: space-between; /* Space out logo and hamburger */
             }
             .navbar .container {
-                flex-direction: column;
-                gap: 10px;
+                flex-direction: row; /* Keep logo and hamburger in a row */
+                justify-content: space-between;
+                width: 100%;
             }
             .nav-links {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
+                /* Initially hidden off-screen */
+                position: fixed;
+                top: 0; /* Start from top of viewport */
+                left: -100%; /* Off-screen to the left */
+                width: 100%;
+                height: 100vh; /* Full viewport height */
+                background-color: rgba(var(--current-bg-deep-rgb), 0.95); /* Semi-transparent dark background */
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center; /* Center items vertically */
+                align-items: center;
+                gap: 25px; /* More space between links */
+                transition: left 0.4s ease-in-out; /* Smooth slide-in */
+                z-index: 999; /* Below toggle button, above content */
             }
+            .nav-links.active {
+                left: 0; /* Slide into view */
+            }
+            .nav-links li {
+                margin: 0; /* Remove horizontal margin */
+                opacity: 0; /* Start hidden for staggered animation */
+                transform: translateY(20px);
+                transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            }
+            .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+            .nav-links.active li:nth-child(2) { transition-delay: 0.15s; }
+            .nav-links.active li:nth-child(3) { transition-delay: 0.2s; }
+            .nav-links.active li:nth-child(4) { transition-delay: 0.25s; }
+            .nav-links.active li:nth-child(5) { transition-delay: 0.3s; }
+            .nav-links.active li:nth-child(6) { transition-delay: 0.35s; }
+            .nav-links.active li:nth-child(7) { transition-delay: 0.4s; }
+            .nav-links.active li:nth-child(8) { transition-delay: 0.45s; }
+
             .nav-hire-btn {
                 margin-left: 0;
-                margin-top: 10px;
+                margin-top: 0; /* Adjust for mobile menu, button will be inside mobile menu */
+            }
+
+            .hamburger-menu {
+                display: block; /* Show hamburger on mobile */
+            }
+
+            .theme-toggle-btn {
+                order: 1; /* Position toggle button next to logo */
+                margin-left: auto; /* Push it to the left of hamburger */
+                margin-right: 15px; /* Spacing before hamburger */
             }
             .hero-content h1 {
                 font-size: 2.5rem;
@@ -1051,6 +1178,11 @@
              .custom-cursor {
                 display: none !important; /* Hide custom cursor on mobile */
             }
+            .hero-image-container {
+                width: 200px; /* Further reduce size for mobile */
+                height: 200px;
+                margin-bottom: 30px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1078,7 +1210,7 @@
         }
 
         /* Modal Styling */
-        .skill-modal-overlay {
+        .skill-modal-overlay, .survey-modal-overlay { /* Apply to both modals */
             position: fixed;
             top: 0;
             left: 0;
@@ -1096,13 +1228,13 @@
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
-        .skill-modal-overlay.active {
+        .skill-modal-overlay.active, .survey-modal-overlay.active { /* Apply to both active modals */
             opacity: 1;
             visibility: visible;
             animation: fadeInOverlay 0.3s ease-out;
         }
 
-        .skill-modal-content {
+        .skill-modal-content, .survey-modal-content { /* Apply to both modal contents */
             background: rgba(var(--current-bg-mid-rgb), 0.95); /* More opaque for modal */
             border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
             border-radius: 15px;
@@ -1115,13 +1247,14 @@
             transform: translateY(100%);
             opacity: 0;
         }
-        .skill-modal-overlay.active .skill-modal-content {
+        .skill-modal-overlay.active .skill-modal-content,
+        .survey-modal-overlay.active .survey-modal-content { /* Apply to both active modal contents */
             transform: translateY(0);
             opacity: 1;
         }
 
 
-        .skill-modal-content .close-button {
+        .skill-modal-content .close-button, .survey-modal-content .close-button { /* Apply to both close buttons */
             position: absolute;
             top: 15px;
             right: 15px;
@@ -1132,12 +1265,12 @@
             cursor: pointer;
             transition: color 0.2s ease, transform 0.2s ease;
         }
-        .skill-modal-content .close-button:hover {
+        .skill-modal-content .close-button:hover, .survey-modal-content .close-button:hover { /* Apply to both close buttons hover */
             color: var(--current-primary-color);
             transform: rotate(90deg);
         }
 
-        .skill-modal-content h3 {
+        .skill-modal-content h3, .survey-modal-content h3 { /* Apply to both modal headings */
             font-size: 2rem;
             color: var(--current-primary-color);
             margin-bottom: 25px;
@@ -1194,9 +1327,141 @@
             font-size: 0.8em;
             text-anchor: start;
         }
+
+        /* Survey specific styles */
+        .survey-content p {
+            color: var(--current-text-color-primary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .survey-rating-options {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .survey-rating-option input[type="radio"] {
+            display: none; /* Hide default radio button */
+        }
+
+        .survey-rating-option label {
+            background-color: rgba(var(--current-bg-deep-rgb), 0.5);
+            color: var(--current-text-color-secondary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .survey-rating-option input[type="radio"]:checked + label {
+            background-color: var(--current-primary-color);
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+            transform: translateY(-3px);
+            border-color: var(--current-primary-color);
+        }
+
+        .survey-rating-option label:hover {
+            background-color: rgba(var(--current-bg-mid-rgb), 0.7);
+            color: var(--current-primary-color);
+            border-color: var(--current-primary-color);
+        }
+         .survey-rating-option input[type="radio"]:checked + label:hover {
+            background-color: var(--current-hover-effect);
+            color: #fff;
+        }
+
+        .survey-comment-area {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .survey-comment-area textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.08);
+            color: var(--current-text-color-primary);
+            font-size: 1rem;
+            min-height: 100px;
+            resize: vertical;
+            outline: none;
+            transition: border-color var(--transition-speed), background-color var(--transition-speed), box-shadow 0.2s ease;
+        }
+        .survey-comment-area textarea:focus {
+            border-color: var(--current-primary-color);
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .survey-comment-area textarea::placeholder {
+            color: var(--current-text-color-secondary);
+            opacity: 0.8;
+        }
+
+        .survey-submit-btn {
+            background-color: var(--current-primary-color);
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+            width: fit-content;
+            margin: 0 auto;
+            display: block; /* Center the button */
+        }
+        .survey-submit-btn:hover {
+            background-color: var(--current-hover-effect);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Survey Message Box */
+        .survey-message-box {
+            background-color: rgba(var(--current-bg-light-rgb), 0.9);
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            color: var(--current-text-color-primary);
+        }
+        .survey-message-box.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .survey-message-box.success {
+            border: 1px solid #4CAF50;
+            background-color: rgba(76, 175, 80, 0.2);
+        }
+        .survey-message-box.error {
+            border: 1px solid #F44336;
+            background-color: rgba(244, 67, 54, 0.2);
+        }
+
+
     </style>
     <!-- D3.js library for charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <!-- Three.js library for 3D rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- No Firebase SDKs in this version -->
 </head>
 <body>
     <div id="loadingOverlay"></div> <!-- Loading Overlay -->
@@ -1206,6 +1471,9 @@
         <header class="navbar">
             <div class="container">
                 <div class="logo">Ayan Pal</div>
+                <button class="hamburger-menu" id="hamburgerMenu" aria-label="Open navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
@@ -1213,14 +1481,16 @@
                     <li><a href="#case-study">Case Study</a></li>
                     <li><a href="#performance">Performance</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#tools">Tools</a></li> <!-- New nav link for Tools -->
+                    <li><a href="#tools">Tools</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <li>
+                        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle light and dark mode">
+                            <i class="fas fa-sun" style="display: none;"></i>
+                            <i class="fas fa-moon" style="display: none;"></i>
+                        </button>
+                    </li>
+                    <li><a href="#contact" class="nav-hire-btn">Hire Me</a></li>
                 </ul>
-                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle light and dark mode">
-                    <i class="fas fa-sun" style="display: none;"></i>
-                    <i class="fas fa-moon" style="display: none;"></i>
-                </button>
-                <a href="#contact" class="nav-hire-btn">Hire Me</a>
             </div>
         </header>
 
@@ -1233,13 +1503,16 @@
                     <a href="#contact" class="btn secondary-btn">Get in Touch</a>
                 </div>
             </div>
+            <div class="hero-image-container">
+                <canvas id="threeJsCanvas"></canvas>
+            </div>
         </section>
 
         <section id="about" class="about-section animated-section">
             <div class="container">
                 <h2>What <span class="highlight">I Do</span></h2>
                 <div class="section-content-box">
-                    <p>Results-driven Content Strategist with 2+ years of experience blending academic content creation, AI solutions, and business development. My expertise delivers measurable improvements in engagement, efficiency, and growth. I leverage data and technology to create impactful digital experiences and streamline operations. Let's create something extraordinary.</p>
+                    <p>Results-driven Content Strategist with 4+ years of experience blending academic content creation, AI solutions, and business development. My expertise delivers measurable improvements in engagement, efficiency, and growth. I leverage data and technology to create impactful digital experiences and streamline operations. Let's create something extraordinary.</p>
                     <div class="about-grid">
                         <div class="about-card" data-skill-category="content-seo">
                             <div class="icon-placeholder content-icon"></div>
@@ -1459,13 +1732,15 @@
                 <h2>Get in <span class="highlight">Touch</span></h2>
                 <div class="contact-form-container section-content-box">
                     <p style="margin-bottom: 25px; color: var(--current-text-color-primary);">Have a project in mind or just want to say hello? Let's connect and discuss how I can bring value to your next initiative.</p>
-                    <form>
+                    <!-- Contact form inputs (no backend submission now) -->
+                    <div id="contactForm">
                         <input type="text" id="name" name="name" placeholder="Your Name" required>
                         <input type="email" id="email" name="email" placeholder="Your Email" required>
                         <input type="text" id="subject" name="subject" placeholder="Subject">
                         <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-                        <button type="submit">Send Message</button>
-                    </form>
+                        <button type="submit" id="submitMessageBtn">Send Message</button>
+                        <div id="formMessage" class="message-box"></div> <!-- Message box for feedback -->
+                    </div>
                     <p style="margin-top: 30px; color: var(--current-text-color-secondary);">
                         Reach out directly: <br>
                         Email: <a href="mailto:Ayanpal0698@gmail.com" class="highlight-link">Ayanpal0698@gmail.com</a> <br>
@@ -1500,7 +1775,218 @@
         </div>
     </div>
 
+    <!-- Survey Pop-up Modal Structure -->
+    <div id="surveyModal" class="survey-modal-overlay">
+        <div class="survey-modal-content">
+            <button class="close-button" id="closeSurveyBtn">&times;</button>
+            <h3>Quick Survey: Your Feedback Matters!</h3>
+            <p>How satisfied are you with your experience on this portfolio website?</p>
+
+            <div class="survey-rating-options">
+                <div class="survey-rating-option">
+                    <input type="radio" id="rating5" name="satisfactionRating" value="5" required>
+                    <label for="rating5"><i class="fas fa-star"></i> Excellent</label>
+                </div>
+                <div class="survey-rating-option">
+                    <input type="radio" id="rating4" name="satisfactionRating" value="4">
+                    <label for="rating4"><i class="fas fa-star"></i> Good</label>
+                </div>
+                <div class="survey-rating-option">
+                    <input type="radio" id="rating3" name="satisfactionRating" value="3">
+                    <label for="rating3"><i class="fas fa-star"></i> Average</label>
+                </div>
+                <div class="survey-rating-option">
+                    <input type="radio" id="rating2" name="satisfactionRating" value="2">
+                    <label for="rating2"><i class="fas fa-star"></i> Fair</label>
+                </div>
+                <div class="survey-rating-option">
+                    <input type="radio" id="rating1" name="satisfactionRating" value="1">
+                    <label for="rating1"><i class="fas fa-star"></i> Poor</label>
+                </div>
+            </div>
+
+            <div class="survey-comment-area">
+                <textarea id="surveyComments" placeholder="Any additional comments or suggestions? (Optional)"></textarea>
+            </div>
+
+            <button type="submit" id="submitSurveyBtn" class="survey-submit-btn">Submit Feedback</button>
+            <div id="surveyMessage" class="survey-message-box"></div>
+        </div>
+    </div>
+
+
     <script>
+        // Global variables for Three.js scene
+        let scene, camera, renderer, plane;
+        let isDragging = false;
+        let previousMouseX = 0;
+        let previousMouseY = 0;
+
+        // Function to initialize Three.js
+        async function initThreeJs() {
+            const container = document.getElementById('hero-image-container');
+            const canvas = document.getElementById('threeJsCanvas');
+
+            // 1. Scene
+            scene = new THREE.Scene();
+
+            // 2. Camera
+            camera = new THREE.PerspectiveCamera(25, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+            camera.position.z = 1.5;
+
+            // 3. Renderer
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            renderer.setClearColor(0x000000, 0);
+            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            // Add basic ambient light
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            scene.add(ambientLight);
+
+            // Use the actual filename directly, as files in the environment are served locally
+            const imageUrl = "ayan.jpg";
+
+            try {
+                // Fetch the image as a Blob
+                const response = await fetch(imageUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const imageBlob = await response.blob();
+
+                // Create an Object URL from the Blob
+                const objectURL = URL.createObjectURL(imageBlob);
+
+                // Load image using standard Image object with the Object URL
+                const img = new Image();
+                img.src = objectURL;
+
+                img.onload = function() {
+                    const texture = new THREE.Texture(img);
+                    texture.needsUpdate = true;
+
+                    // Create a plane geometry
+                    const aspectRatio = img.width / img.height;
+                    const planeWidth = 1; // Base width
+                    const planeHeight = planeWidth / aspectRatio; // Calculate height to maintain aspect ratio
+
+                    const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
+                    const material = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide });
+                    plane = new THREE.Mesh(geometry, material);
+                    scene.add(plane);
+
+                    // Revoke the Object URL to release memory (optional for single long-lived texture)
+                    URL.revokeObjectURL(objectURL);
+
+                    // Start animation loop after texture is loaded
+                    animate();
+                };
+
+                img.onerror = function(err) {
+                    console.error('An error happened when loading the image via Object URL:', err);
+                    loadFallbackImage();
+                };
+
+            } catch (error) {
+                console.error('Error fetching image:', error);
+                loadFallbackImage();
+            }
+
+            function loadFallbackImage() {
+                const fallbackImageUrl = 'https://placehold.co/300x300/0A0A0A/FFD700?text=Image+Load+Error';
+                const fallbackImg = new Image();
+                fallbackImg.src = fallbackImageUrl;
+
+                fallbackImg.onload = function() {
+                    const fallbackTexture = new THREE.Texture(fallbackImg);
+                    fallbackTexture.needsUpdate = true;
+
+                    const aspectRatio = fallbackImg.width / fallbackImg.height;
+                    const planeWidth = 1;
+                    const planeHeight = planeWidth / aspectRatio;
+                    const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
+                    const material = new THREE.MeshBasicMaterial({ map: fallbackTexture, side: THREE.DoubleSide });
+                    plane = new THREE.Mesh(geometry, material);
+                    scene.add(plane);
+                    animate();
+                };
+
+                fallbackImg.onerror = function(fallbackErr) {
+                    console.error('An error happened when loading the fallback texture:', fallbackErr);
+                    // If fallback also fails, render a solid color plane
+                    const geometry = new THREE.PlaneGeometry(1, 1); // Default size
+                    const material = new THREE.MeshBasicMaterial({ color: 0x888888, side: THREE.DoubleSide }); // Grey fallback
+                    plane = new THREE.Mesh(geometry, material);
+                    scene.add(plane);
+                    animate();
+                };
+            }
+
+
+            // Mouse interaction for rotation
+            canvas.addEventListener('mousedown', onMouseDown);
+            canvas.addEventListener('mouseup', onMouseUp);
+            canvas.addEventListener('mousemove', onMouseMove);
+
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            if (plane) {
+                // You can add a subtle auto-rotation here if not dragging
+                if (!isDragging) {
+                    plane.rotation.y += 0.002; // Slow continuous rotation
+                    plane.rotation.x += 0.001;
+                }
+            }
+            renderer.render(scene, camera);
+        }
+
+        // Mouse interaction functions
+        function onMouseDown(event) {
+            isDragging = true;
+            previousMouseX = event.clientX;
+            previousMouseY = event.clientY;
+            document.getElementById('threeJsCanvas').style.cursor = 'grabbing';
+        }
+
+        function onMouseUp(event) {
+            isDragging = false;
+            document.getElementById('threeJsCanvas').style.cursor = 'grab';
+        }
+
+        function onMouseMove(event) {
+            if (!isDragging || !plane) return;
+
+            const deltaX = (event.clientX - previousMouseX) * 0.01; // Adjust sensitivity
+            const deltaY = (event.clientY - previousMouseY) * 0.01;
+
+            plane.rotation.y += deltaX;
+            plane.rotation.x += deltaY;
+
+            previousMouseX = event.clientX;
+            previousMouseY = event.clientY;
+        }
+
+        // Handle window resize for responsiveness
+        function onWindowResize() {
+            const canvas = document.getElementById('threeJsCanvas');
+            const container = canvas.parentElement;
+            if (container && camera && renderer) {
+                const newWidth = container.clientWidth;
+                const newHeight = container.clientHeight;
+
+                camera.aspect = newWidth / newHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(newWidth, newHeight);
+            }
+        }
+
+
         document.addEventListener('DOMContentLoaded', function() {
             // --- Page Loading Overlay ---
             const loadingOverlay = document.getElementById('loadingOverlay');
@@ -1614,6 +2100,25 @@
                     barColor: 'var(--current-primary-color)'
                 }
             };
+
+            // --- Theme Toggle Logic ---
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const sunIcon = themeToggleBtn.querySelector('.fa-sun');
+            const moonIcon = themeToggleBtn.querySelector('.fa-moon');
+            const body = document.body;
+
+            // --- Skill Detail Modal Elements ---
+            const skillDetailModal = document.getElementById('skillDetailModal');
+            const closeModalButton = skillDetailModal.querySelector('.close-button');
+            const modalSkillTitle = document.getElementById('modalSkillTitle');
+            const modalSkillChart = document.getElementById('modalSkillChart');
+
+            // --- Survey Pop-up Logic ---
+            const surveyModal = document.getElementById('surveyModal');
+            const closeSurveyBtn = document.getElementById('closeSurveyBtn');
+            const submitSurveyBtn = document.getElementById('submitSurveyBtn');
+            const surveyMessage = document.getElementById('surveyMessage');
+
 
             // --- Main Chart Rendering Function ---
             function renderMainChart() {
@@ -2010,20 +2515,6 @@
                 }
             }
 
-            // --- Theme Toggle Logic ---
-            const themeToggleBtn = document.getElementById('themeToggle');
-            const sunIcon = themeToggleBtn.querySelector('.fa-sun');
-            const moonIcon = themeToggleBtn.querySelector('.fa-moon');
-            const body = document.body;
-
-            // --- Skill Detail Modal Elements ---
-            const skillDetailModal = document.getElementById('skillDetailModal');
-            const closeModalButton = skillDetailModal.querySelector('.close-button');
-            const modalSkillTitle = document.getElementById('modalSkillTitle');
-            const modalSkillChart = document.getElementById('modalSkillChart');
-            const aboutCards = document.querySelectorAll('.about-card');
-
-
             // Function to set theme
             function setTheme(theme) {
                 body.setAttribute('data-theme', theme);
@@ -2037,7 +2528,9 @@
                 }
                 // Re-render charts to pick up new theme colors
                 renderMainChart();
+                // Only attempt to re-render modal chart if the modal is currently active
                 if (skillDetailModal.classList.contains('active')) {
+                    // Find the original skill category based on the modal title
                     const originalSkillCategory = Object.keys(skillDataMap).find(key => skillDataMap[key].title === modalSkillTitle.textContent);
                     if (originalSkillCategory) {
                         renderModalChart(skillDataMap[originalSkillCategory], 'modalSkillChart');
@@ -2059,27 +2552,32 @@
             // --- Scroll-triggered Animations ---
             const animatedSections = document.querySelectorAll('.animated-section');
 
-            const sectionObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Stop observing once visible
-                    }
-                });
-            }, {
-                root: null, // viewport
-                rootMargin: '0px',
-                threshold: 0.2 // Trigger when 20% of the section is visible
-            });
+            // Encapsulate Intersection Observer logic for scroll-triggered animations
+            (function() {
+                const observerOptions = {
+                    root: null, // viewport
+                    rootMargin: '0px',
+                    threshold: 0.2 // Trigger when 20% of the section is visible
+                };
 
-            animatedSections.forEach(section => {
-                sectionObserver.observe(section);
-            });
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target); // Stop observing once visible
+                        }
+                    });
+                }, observerOptions);
+
+                animatedSections.forEach(section => {
+                    observer.observe(section);
+                });
+            })();
 
 
             // --- Custom Cursor Logic ---
             const customCursor = document.querySelector('.custom-cursor');
-            const interactiveElements = 'a, button, input, textarea, .about-card, .portfolio-item, .testimonial-card, .tool-card'; // Added tool-card
+            const interactiveElements = 'a, button, input, textarea, .about-card, .portfolio-item, .testimonial-card, .tool-card, .survey-rating-option label, #threeJsCanvas'; // Added threeJsCanvas
 
             // Only show custom cursor on non-mobile devices
             if (window.innerWidth > 768) {
@@ -2130,30 +2628,33 @@
 
 
             // Intersection Observer for active navigation links
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-links a');
+            (function() {
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-links a');
 
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.5
-            };
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.5
+                };
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        navLinks.forEach(link => link.classList.remove('active'));
-                        const currentNavLink = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
-                        if (currentNavLink) {
-                            currentNavLink.classList.add('active');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            navLinks.forEach(link => link.classList.remove('active'));
+                            const currentNavLink = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+                            if (currentNavLink) {
+                                currentNavLink.classList.add('active');
+                            }
                         }
-                    }
-                });
-            }, observerOptions);
+                    });
+                }, observerOptions);
 
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
+            })();
+
 
             // Initial render of the main chart
             renderMainChart();
@@ -2162,18 +2663,26 @@
             window.addEventListener('resize', renderMainChart);
 
             // Event listeners for "What I Do" cards
-            aboutCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    const skillCategory = this.dataset.skillCategory;
-                    const skillData = skillDataMap[skillCategory];
+            const aboutCards = document.querySelectorAll('.about-card');
+            // Add a console log to verify if elements are found
+            console.log('About cards found:', aboutCards);
 
-                    if (skillData) {
-                        modalSkillTitle.textContent = skillData.title;
-                        renderModalChart(skillData, 'modalSkillChart');
-                        skillDetailModal.classList.add('active');
-                    }
+            // Safely iterate through aboutCards if elements are found
+            if (aboutCards) { // NodeList is never null, but this check is harmless
+                aboutCards.forEach(card => {
+                    card.addEventListener('click', function() {
+                        const skillCategory = this.dataset.skillCategory;
+                        const skillData = skillDataMap[skillCategory];
+
+                        if (skillData) {
+                            modalSkillTitle.textContent = skillData.title;
+                            renderModalChart(skillData, 'modalSkillChart');
+                            skillDetailModal.classList.add('active');
+                        }
+                    });
                 });
-            });
+            }
+
 
             // Close modal functionality
             closeModalButton.addEventListener('click', function() {
@@ -2209,7 +2718,140 @@
                     backToTopBtn.classList.remove('show');
                 }
             });
-        });
+
+            // --- Contact Form Submission Logic (Local-only message) ---
+            const submitMessageBtn = document.getElementById('submitMessageBtn');
+            const formMessage = document.getElementById('formMessage');
+
+            if (submitMessageBtn) {
+                submitMessageBtn.addEventListener('click', (event) => {
+                    event.preventDefault(); // Prevent default form submission behavior
+
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+
+                    // Basic validation
+                    if (!name || !email || !message) {
+                        displayMessage("Please fill in all required fields (Name, Email, Message).", "error");
+                        return;
+                    }
+
+                    // Simulate success message, as there's no backend for submission
+                    displayMessage("Your message has been received! (Note: This form does not send data to a backend in this version).", "success");
+                    // Clear form fields
+                    document.getElementById('name').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('subject').value = '';
+                    document.getElementById('message').value = '';
+                });
+            }
+
+            // Function to display messages in the message box
+            function displayMessage(msg, type) {
+                const targetMessageBox = (document.activeElement && document.activeElement.closest('#contactForm')) ? formMessage : surveyMessage;
+                targetMessageBox.textContent = msg;
+                targetMessageBox.className = `message-box show ${type}`; // Apply show and type classes
+
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    targetMessageBox.classList.remove('show');
+                    targetMessageBox.classList.remove(type);
+                    targetMessageBox.textContent = '';
+                }, 5000);
+            }
+
+            // --- Survey Pop-up Logic (Modified) ---
+            function showSurvey() {
+                surveyModal.classList.add('active');
+            }
+
+            function closeSurvey() {
+                surveyModal.classList.remove('active');
+                // Optional: Clear form if user closes without submitting
+                document.getElementById('surveyComments').value = '';
+                document.querySelectorAll('input[name="satisfactionRating"]').forEach(radio => radio.checked = false);
+            }
+
+            // Modified submitSurvey function - no backend call, just close
+            function submitSurveyLocal() {
+                // You could optionally add a small local message here like "Thanks!"
+                // displaySurveyMessage("Thank you for your feedback!", "success");
+                closeSurvey(); // Close the modal immediately
+            }
+
+            // Function to display messages for the survey (still here for potential future use or local messages)
+            function displaySurveyMessage(msg, type) {
+                surveyMessage.textContent = msg;
+                surveyMessage.className = `survey-message-box show ${type}`;
+
+                setTimeout(() => {
+                    surveyMessage.classList.remove('show');
+                    surveyMessage.classList.remove(type);
+                    surveyMessage.textContent = '';
+                }, 5000);
+            }
+
+            // Event Listeners for Survey
+            closeSurveyBtn.addEventListener('click', closeSurvey);
+            submitSurveyBtn.addEventListener('click', submitSurveyLocal);
+            surveyModal.addEventListener('click', function(event) {
+                if (event.target === surveyModal) { // Close if clicked on overlay, not content
+                    closeSurvey();
+                }
+            });
+
+            // New: Show survey when user reaches the contact section using IntersectionObserver
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+                const surveyObserverOptions = {
+                    root: null, // viewport
+                    rootMargin: '0px',
+                    threshold: 0.2 // Trigger when 20% of the contact section is visible
+                };
+
+                const surveyObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            showSurvey();
+                        }
+                    });
+                }, surveyObserverOptions);
+
+                surveyObserver.observe(contactSection);
+            }
+
+            // --- Hamburger Menu Logic ---
+            const hamburgerMenu = document.getElementById('hamburgerMenu');
+            const navLinks = document.querySelector('.nav-links'); // Select the ul element
+
+            if (hamburgerMenu && navLinks) {
+                hamburgerMenu.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+
+                // Close menu when a navigation link is clicked
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                    });
+                });
+                // Also close if theme toggle or hire me button clicked inside the mobile menu
+                const themeToggleInsideMenu = navLinks.querySelector('#themeToggle');
+                const hireMeBtnInsideMenu = navLinks.querySelector('.nav-hire-btn');
+                if (themeToggleInsideMenu) {
+                    themeToggleInsideMenu.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                    });
+                }
+                 if (hireMeBtnInsideMenu) {
+                    hireMeBtnInsideMenu.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                    });
+                }
+            }
+        }); // End DOMContentLoaded
 
         // Function for smooth scroll to top (outside DOMContentLoaded for global access from onclick)
         function scrollToTop() {
@@ -2218,6 +2860,18 @@
                 behavior: 'smooth'
             });
         }
+        // Initialize Three.js when the window fully loads
+        window.onload = function() {
+            initThreeJs();
+            // Also trigger page loading overlay to fade out here
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (loadingOverlay) {
+                loadingOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                }, 500);
+            }
+        };
     </script>
 </body>
 </html>
