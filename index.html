@@ -191,6 +191,19 @@
             color: var(--current-primary-color);
             transition: color var(--transition-speed);
         }
+        .logo img {
+            height: 60px; /* adjust size as needed */
+            width: 60px;
+            opacity:0.8;
+            transition: all 0.5s ease-in-out;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+            display: block;
+        }
+        .logo img:hover {
+  opacity: 1; /* full visibility on hover */
+  transform: scale(2.05); /* slight zoom effect */
+}
+
         .navbar .logo:hover {
             color: var(--current-hover-effect);
         }
@@ -1472,7 +1485,9 @@
     <div class="main-wrapper">
         <header class="navbar">
             <div class="container">
-                <div class="logo">Ayan Pal</div>
+                 <div class="logo">
+                    <img src="ayan_logo.jpg" alt="Ayan pal logo" />
+                </div>
                   <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle light and dark mode">
                     <i class="fas fa-sun" style="display: none;"></i>
                     <i class="fas fa-moon" style="display: none;"></i>
