@@ -63,6 +63,19 @@
             color: var(--primary-color);
             margin-left: 20px;
         }
+        .logo img{
+            height: 60px; /* adjust size as needed */
+            width: 60px;
+            opacity:0.8;
+            transition: all 0.5s ease-in-out;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+            display: block;
+
+            }
+                 .logo img:hover {
+  opacity: 1; /* full visibility on hover */
+  transform: scale(2.05); /* slight zoom effect */
+}
         .sub-page-header .back-link {
             margin-right: 20px;
             padding: 8px 15px;
@@ -280,7 +293,9 @@
 </head>
 <body>
     <header class="sub-page-header">
-        <div class="logo">Ayan Pal</div>
+          <div class="logo">
+                    <img src="ayan_logo.jpg" alt="Ayan pal logo" />
+                </div>
         <a href="index.html" class="back-link">← Back to Portfolio</a>
     </header>
 
