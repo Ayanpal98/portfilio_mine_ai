@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayan Pal - Orange Software Data Visualization Project</title>
+
+    <!-- SEO Meta Tags for this specific project page -->
+    <meta name="description" content="Case study on data visualization using Orange Data Mining software by Ayan Pal, showcasing customer segmentation analysis.">
+    <meta name="keywords" content="Ayan Pal, Orange Data Mining, data visualization, customer segmentation, data analysis, machine learning, business intelligence, portfolio project">
+    <meta name="author" content="Ayan Pal">
+    <link rel="canonical" href="YOUR_PROJECT_URL_HERE"> <!-- Replace with your actual deployed URL for this page -->
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Ayan Pal - Orange Data Visualization Project">
+    <meta property="og:description" content="Case study on data visualization using Orange Data Mining software by Ayan Pal, showcasing customer segmentation analysis.">
+    <meta property="og:image" content="https://placehold.co/1200x630/0A0A0A/FFD700?text=Orange+Viz+Project"> <!-- Placeholder, replace with actual project image -->
+    <meta property="og:url" content="YOUR_PROJECT_URL_HERE">
+    <meta property="og:type" content="article">
+
+    <!-- Google Fonts for Poppins and Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* General Styling - Dark Theme (Default) - Copied from index.html for consistency */
+        :root {
+            --primary-color: #FFD700; /* Gold */
+            --secondary-color: #bbbbbb; /* Light grey text */
+            --dark-bg-deep: #000000; /* Bold Black */
+            --dark-bg-deep-rgb: 0, 0, 0;
+            --dark-bg-mid: #1a1a1a; /* Very dark grey */
+            --dark-bg-mid-rgb: 26, 26, 26;
+            --dark-bg-light: #2c2c2c; /* Slightly lighter black */
+            --dark-bg-light-rgb: 44, 44, 44;
+            --text-color-primary: #ffffff; /* White text */
+            --text-color-secondary: #cccccc; /* Secondary text */
+            --card-bg-base: #2c2c2c;
+            --hover-effect: #FFEB84; /* Brighter gold */
+            --shadow-color: rgba(0, 0, 0, 0.6);
+            --glow-color: rgba(255, 215, 0, 0.6);
+            --hero-overlay-color: rgba(0, 0, 0, 0.7);
+
+            /* Light Theme Variables */
+            --light-primary-color: #6a4cff;
+            --light-secondary-color: #555555;
+            --light-bg-deep: #f8f8f8;
+            --light-bg-mid: #ffffff;
+            --light-bg-light: #eeeeee;
+            --light-text-color-primary: #333333;
+            --light-text-color-secondary: #666666;
+            --light-card-bg-base: #f0f0f0;
+            --light-hover-effect: #4b2eff;
+            --light-shadow-color: rgba(0, 0, 0, 0.15);
+            --light-glow-color: rgba(106, 76, 255, 0.4);
+            --light-hero-overlay-color: rgba(255, 255, 255, 0.7);
+
+            --transition-speed: 0.3s ease;
+            --glass-blur: 15px;
+            --glass-bg-opacity: 0.4;
+            --glass-border-opacity: 0.15;
+        }
+
+        body {
+            --current-primary-color: var(--primary-color);
+            --current-secondary-color: var(--secondary-color);
+            --current-bg-deep: var(--dark-bg-deep);
+            --current-bg-deep-rgb: var(--dark-bg-deep-rgb);
+            --current-bg-mid: var(--dark-bg-mid);
+            --current-bg-mid-rgb: var(--dark-bg-mid-rgb);
+            --current-bg-light: var(--dark-bg-light);
+            --current-bg-light-rgb: var(--dark-bg-light-rgb);
+            --current-text-color-primary: var(--text-color-primary);
+            --current-text-color-secondary: var(--text-color-secondary);
+            --current-card-bg-base: var(--card-bg-base);
+            --current-hover-effect: var(--hover-effect);
+            --current-shadow-color: var(--shadow-color);
+            --current-glow-color: var(--glow-color);
+            --current-hero-overlay-color: var(--hero-overlay-color);
+
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, var(--current-bg-deep) 0%, var(--current-bg-mid) 100%);
+            color: var(--current-text-color-primary);
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body[data-theme="light"] {
+            --current-primary-color: var(--light-primary-color);
+            --current-secondary-color: var(--light-secondary-color);
+            --current-bg-deep: var(--light-bg-deep);
+            --current-bg-deep-rgb: 248, 248, 248;
+            --current-bg-mid: var(--light-bg-mid);
+            --current-bg-mid-rgb: 255, 255, 255;
+            --current-bg-light: var(--light-bg-light);
+            --current-bg-light-rgb: 238, 238, 238;
+            --current-text-color-primary: var(--light-text-color-primary);
+            --current-text-color-secondary: var(--light-text-color-secondary);
+            --current-card-bg-base: var(--light-card-bg-base);
+            --current-hover-effect: var(--light-hover-effect);
+            --current-shadow-color: var(--light-shadow-color);
+            --light-glow-color: rgba(106, 76, 255, 0.4);
+            --light-hero-overlay-color: rgba(255, 255, 255, 0.7);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--current-text-color-primary);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--current-primary-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Project Page Specific Styling */
+        .project-header {
+            background-color: rgba(var(--current-bg-deep-rgb), 0.7);
+            padding: 2rem 40px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+            box-shadow: 0 2px 15px var(--current-shadow-color);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+        }
+
+        .project-header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--current-primary-color);
+        }
+
+        .project-header p {
+            font-size: 1.2rem;
+            color: var(--current-text-color-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .project-content-section {
+            padding: 60px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(var(--current-bg-light-rgb), var(--glass-bg-opacity));
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--current-shadow-color);
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .project-content-section h2 {
+            font-size: 2.2rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: var(--current-primary-color);
+            text-align: left;
+        }
+        .project-content-section h2:first-of-type {
+            margin-top: 0; /* No top margin for the first h2 */
+        }
+
+        .project-content-section p {
+            font-size: 1.1rem;
+            color: var(--current-text-color-primary);
+            margin-bottom: 20px;
+        }
+
+        .project-content-section ul {
+            list-style: disc;
+            margin-left: 25px;
+            margin-bottom: 20px;
+            color: var(--current-text-color-secondary);
+        }
+        .project-content-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .project-content-section strong {
+            color: var(--current-primary-color);
+        }
+
+        .project-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: block; /* Ensures it takes full width and centers if needed */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .primary-btn {
+            background-color: var(--current-primary-color);
+            color: #fff;
+            border: none;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .primary-btn:hover {
+            background-color: var(--current-hover-effect);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .back-button-container {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        /* D3 Chart Specific Styles (for the embedded visualization) */
+        .chart-container {
+            background: rgba(var(--current-bg-deep-rgb), 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+            position: relative; /* For tooltip positioning */
+        }
+        .chart-svg {
+            width: 100%;
+            height: 400px; /* Adjust as needed */
+            display: block;
+        }
+        .chart-axis-label {
+            fill: var(--current-text-color-secondary) !important;
+            font-size: 0.9em;
+        }
+        .bar-chart-bar {
+            fill: var(--current-primary-color);
+            transition: fill 0.3s ease;
+        }
+        .bar-chart-bar:hover {
+            fill: var(--current-hover-effect);
+        }
+        .bar-label {
+            fill: var(--current-text-color-secondary);
+            font-size: 0.9em;
+            text-anchor: end;
+        }
+        .bar-value {
+            fill: var(--current-text-color-primary);
+            font-size: 0.8em;
+            text-anchor: start;
+        }
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: auto;
+            height: auto;
+            padding: 8px;
+            font: 12px sans-serif;
+            background: rgba(0,0,0,0.8);
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+            color: #fff;
+            opacity: 0;
+            transition: opacity 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+
+        /* Responsive Design for Project Page */
+        @media (max-width: 768px) {
+            .project-header {
+                padding: 1.5rem 20px;
+            }
+            .project-header h1 {
+                font-size: 2.2rem;
+            }
+            .project-header p {
+                font-size: 1rem;
+            }
+            .project-content-section {
+                padding: 30px 20px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            .project-content-section h2 {
+                font-size: 1.8rem;
+                margin-top: 30px;
+            }
+            .project-content-section p {
+                font-size: 1rem;
+            }
+            .chart-svg {
+                height: 300px; /* Adjust chart height for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-header h1 {
+                font-size: 1.8rem;
+            }
+            .project-header p {
+                font-size: 0.9rem;
+            }
+            .project-content-section {
+                padding: 20px 15px;
+            }
+            .project-content-section h2 {
+                font-size: 1.5rem;
+            }
+            .project-content-section p {
+                font-size: 0.9rem;
+            }
+            .chart-svg {
+                height: 250px; /* Further adjust chart height for very small screens */
+            }
+        }
+    </style>
+    <!-- D3.js library for charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+</head>
+<body>
+    <div class="project-header">
+        <h1>Orange Software Data Visualization</h1>
+        <p>A real-life project demonstrating powerful data analysis and visualization capabilities using Orange Data Mining.</p>
+    </div>
+
+    <div class="project-content-section">
+        <h2>Project Overview</h2>
+        <p>This project involved leveraging **Orange Data Mining software** to analyze a real-world dataset and extract meaningful insights through interactive data visualization. The goal was to transform raw data into actionable intelligence, specifically focusing on **customer segmentation** to identify distinct customer groups and their characteristics.</p>
+
+        <h2>My Role</h2>
+        <ul>
+            <li><strong>Data Preparation:</strong> Cleaned and preprocessed raw customer data for analysis.</li>
+            <li><strong>Workflow Design:</strong> Designed and implemented data mining workflows in Orange, utilizing various widgets for data handling, modeling, and visualization.</li>
+            <li><strong>Feature Selection:</strong> Identified key features influencing customer behavior.</li>
+            <li><strong>Clustering & Segmentation:</strong> Applied unsupervised learning algorithms (e.g., K-Means, Hierarchical Clustering) to segment customers.</li>
+            <li><strong>Interactive Visualization:</strong> Created compelling and interactive visualizations within Orange to present segmentation results and other data patterns.</li>
+            <li><strong>Insight Generation:</strong> Interpreted the visualizations to derive actionable business insights.</li>
+        </ul>
+
+        <h2>The Challenge</h2>
+        <p>The client had a large, diverse dataset of customer interactions and purchasing behavior but lacked clear insights into distinct customer groups. The challenge was to identify meaningful segments, understand their unique attributes, and visualize these findings in an intuitive way that non-technical stakeholders could easily grasp for targeted marketing and product development.</p>
+
+        <h2>The Solution: Orange Data Mining & Visualization</h2>
+        <p>I utilized Orange Data Mining's intuitive visual programming environment to build a robust data analysis pipeline. This included:</p>
+        <ul>
+            <li>**Data Import & Exploration:** Loading the dataset and performing initial exploratory data analysis (EDA) using widgets like Data Table, Distributions, and Scatter Plot.</li>
+            <li>**Preprocessing:** Handling missing values, outliers, and normalizing data where necessary.</li>
+            <li>**Clustering:** Applying K-Means clustering to group customers based on their behavioral patterns.</li>
+            <li>**Visualization:** The core of the solution involved using Orange's powerful visualization widgets (e.g., **Scatter Plot**, **Treemap**, **Sieve Diagram**, **Mosaic Display**, and **Distributions**) to visually represent the clusters and their defining characteristics. This allowed for quick identification of high-value segments, at-risk customers, and potential growth areas.</li>
+        </ul>
+
+        <div class="chart-container">
+            <p style="text-align: center; color: var(--current-text-color-primary); font-weight: 600;">Simulated Customer Segment Distribution (Example Visualization)</p>
+            <svg id="orangeVizChart" class="chart-svg"></svg>
+            <p style="text-align: center; font-size: 0.9em; color: var(--current-text-color-secondary); margin-top: 10px;">This bar chart simulates a common output from Orange Data Mining, showing the distribution of customers across identified segments.</p>
+        </div>
+        <p>The interactive nature of Orange's visualizations allowed for dynamic filtering and drilling down into specific segments, providing a deeper understanding of each group's preferences and needs.</p>
+
+        <h2>Results & Impact</h2>
+        <ul>
+            <li><strong>Identified 4 distinct customer segments:</strong> Each with unique purchasing habits and engagement levels.</li>
+            <li><strong>Improved Marketing Targeting:</strong> Provided clear profiles for each segment, enabling the marketing team to design highly personalized campaigns, leading to an estimated **15% increase in campaign ROI**.</li>
+            <li><strong>Enhanced Product Development:</strong> Insights from customer behavior informed product feature prioritization, aligning new developments with actual customer needs.</li>
+            <li><strong>Increased Data Accessibility:</strong> The visual workflows and interactive visualizations made complex data insights accessible to non-technical stakeholders, fostering data-driven decision-making across departments.</li>
+        </ul>
+
+        <h2>Key Learnings</h2>
+        <p>This project reinforced the power of visual programming tools like Orange for rapid prototyping and deployment of data analysis solutions. It highlighted the importance of not just performing analysis, but effectively communicating complex findings through clear and interactive visualizations to drive real business value.</p>
+
+        <div class="back-button-container">
+            <a href="index.html#portfolio" class="btn primary-btn">← Back to Portfolio</a>
+        </div>
+    </div>
+
+    <script>
+        // Function to set theme (copied from index.html)
+        function setTheme(theme) {
+            const body = document.body;
+            body.setAttribute('data-theme', theme);
+            // No need to toggle icons here as this is a project page
+            // Re-render chart to pick up new theme colors
+            renderOrangeVizChart();
+        }
+
+        // Check for saved theme preference on load (copied from index.html)
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark if no preference
+            setTheme(savedTheme);
+        });
+
+        // D3.js Chart for Orange Visualization Simulation
+        function renderOrangeVizChart() {
+            const data = [
+                { segment: 'Segment A (New Users)', customers: 350 },
+                { segment: 'Segment B (Loyal Buyers)', customers: 620 },
+                { segment: 'Segment C (Occasional Shoppers)', customers: 280 },
+                { segment: 'Segment D (High-Value Engaged)', customers: 450 }
+            ];
+
+            const margin = { top: 40, right: 30, bottom: 80, left: 120 }; // Increased left and bottom margin for labels
+            const chartParent = document.getElementById('orangeVizChart').parentElement;
+            const parentWidth = chartParent.getBoundingClientRect().width;
+            const width = Math.max(300, parentWidth - margin.left - margin.right);
+            const height = 400 - margin.top - margin.bottom;
+
+            // Clear existing SVG
+            d3.select("#orangeVizChart").html("");
+
+            const svg = d3.select("#orangeVizChart")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            // X scale (for number of customers)
+            const x = d3.scaleLinear()
+                .domain([0, d3.max(data, d => d.customers) * 1.1]) // 10% padding
+                .range([0, width]);
+
+            // Y scale (for segments)
+            const y = d3.scaleBand()
+                .domain(data.map(d => d.segment))
+                .range([0, height])
+                .padding(0.2);
+
+            // X-axis
+            svg.append("g")
+                .attr("class", "x-axis")
+                .attr("transform", `translate(0,${height})`)
+                .call(d3.axisBottom(x).ticks(5))
+                .selectAll("text")
+                .attr("class", "chart-axis-label");
+
+            svg.append("text")
+                .attr("transform", `translate(${width / 2}, ${height + margin.bottom - 10})`)
+                .style("text-anchor", "middle")
+                .attr("class", "chart-axis-label")
+                .text("Number of Customers");
+
+            // Y-axis
+            svg.append("g")
+                .attr("class", "y-axis")
+                .call(d3.axisLeft(y).tickSize(0)) // No tick lines for y-axis
+                .selectAll("text")
+                .attr("class", "bar-label")
+                .style("text-anchor", "end")
+                .attr("dx", "-0.5em"); // Adjust label position
+
+            svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", -margin.left + 20)
+                .attr("x", -height / 2)
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .attr("class", "chart-axis-label")
+                .text("Customer Segments");
+
+            // Bars
+            svg.selectAll(".bar")
+                .data(data)
+                .enter().append("rect")
+                .attr("class", "bar-chart-bar")
+                .attr("x", 0)
+                .attr("y", d => y(d.segment))
+                .attr("width", d => x(d.customers))
+                .attr("height", y.bandwidth());
+
+            // Bar values (text labels)
+            svg.selectAll(".bar-value")
+                .data(data)
+                .enter().append("text")
+                .attr("class", "bar-value")
+                .attr("x", d => x(d.customers) + 5) // Position text slightly after the bar
+                .attr("y", d => y(d.segment) + y.bandwidth() / 2)
+                .attr("dy", "0.35em")
+                .text(d => d.customers)
+                .style("fill", "var(--current-text-color-primary)");
+
+            // Tooltip setup
+            const tooltip = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+
+            svg.selectAll(".bar-chart-bar")
+                .on("mouseover", function(event, d) {
+                    d3.select(this).style("fill", "var(--current-hover-effect)"); // Highlight bar on hover
+                    tooltip.transition().duration(200).style("opacity", .9);
+                    tooltip.html(`Segment: ${d.segment}<br/>Customers: ${d.customers}`)
+                        .style("left", (event.pageX + 10) + "px")
+                        .style("top", (event.pageY - 28) + "px");
+                })
+                .on("mouseout", function(d) {
+                    d3.select(this).style("fill", "var(--current-primary-color)"); // Revert bar color
+                    tooltip.transition().duration(500).style("opacity", 0);
+                });
+        }
+
+        // Initial render and responsive resize
+        window.addEventListener('load', renderOrangeVizChart);
+        window.addEventListener('resize', renderOrangeVizChart);
+    </script>
+</body>
+</html>
