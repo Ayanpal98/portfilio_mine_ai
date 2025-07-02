@@ -1468,6 +1468,72 @@
             border: 1px solid #F44336;
             background-color: rgba(244, 67, 54, 0.2);
         }
+         h1 {
+  font-size: 2.5rem;
+  color: #fff;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #FFD700;
+  font-family: 'Segoe UI', sans-serif;
+  margin-top: -10px;
+  letter-spacing: 1px;
+  animation: fadeInUp 1s ease-in-out;
+}
+.highlight {
+color: #E6B400;; /* Light champagne gold */
+  font-weight: bold;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: #FFF5CC;
+  left: 0;
+  bottom: -5px;
+  border-radius: 2px;
+  animation: underline 1s ease forwards;
+}
+
+.highlight:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px #FFD700, 0 0 12px #FFA500;
+}
+
+.highlight:hover::after {
+  background: linear-gradient(90deg, #FFFACD, #FFDAB9, #FFFACD);
+  height: 5px;
+}
+
+
+/* Animations */
+@keyframes underline {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 
     </style>
@@ -1519,7 +1585,9 @@
             <div class="hero-content">
                 <h1>Hello, I'm<span class="highlight"> Ayan Pal</span></h1>
                 <br>A content Strategist & Ai solution developer</br>
-                <p>Content Strategist | AI Solutions Developer | Business Growth Expert</p>
+                <p>Content Strategist | AI Innovator | Growth Partner</p>
+                <p>From crafting compelling narratives to deploying AI-driven solutions, I bridge creativity and technology to build content ecosystems that convert. Whether you're launching a startup or scaling an enterprise, I partner with you to drive measurable impact across content, SEO, automation, and digital strategy.
+Let’s create content that doesn't just rank—but resonates.</p>
                 <div class="hero-buttons">
                     <a href="#portfolio" class="btn primary-btn">View My Work</a>
                     <a href="#contact" class="btn secondary-btn">Get in Touch</a>
