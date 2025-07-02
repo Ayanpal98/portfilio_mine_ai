@@ -6,7 +6,7 @@
     <title>Project: Academic Content Management</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
+/*         :root {
             --primary-color: #8c7ae6; /* Soft purple */
             --secondary-color: #bbbbbb; /* Light grey text */
             --dark-bg-deep: #1a0f3d; /* Very deep dark purple */
@@ -21,7 +21,84 @@
             --shadow-color: rgba(0, 0, 0, 0.4); /* Darker shadow for dark theme */
             --hover-effect: #6f5fcf; /* Brighter purple for hover */
             --transition-speed: 0.3s ease;
-        }
+        } */
+        :root {
+    /* --- Shared & Default (Light) Theme Variables --- */
+    /* These variables are the default. If no data-theme attribute is set,
+       or if data-theme="light" is set, these values will be active. */
+
+    /* Colors for main elements and accents (Light Theme) */
+    --primary-color: #DAA520; /* Goldenrod - Warm and inviting gold for primary elements */
+    --secondary-color: #808080; /* Grey - For subtle secondary text/elements */
+
+    /* Backgrounds & Base Colors (Light Theme) */
+    --body-background: #FFFFFF; /* Pure White Solid Background for the entire page */
+    --main-bg-deep: #FFFFFF;    /* Pure White - Main content background */
+    --main-bg-deep-rgb: 255, 255, 255; /* RGB for pure white */
+    --main-bg-mid: #F8F8F8;     /* Very light grey - for subtle sections or slight depth */
+    --main-bg-mid-rgb: 248, 248, 248; /* RGB for very light grey */
+    --main-bg-light: #F2F2F2;   /* Even lighter grey - for very faint distinctions */
+    --main-bg-light-rgb: 242, 242, 242; /* RGB for even lighter grey */
+
+    /* Text Colors (Light Theme) */
+    --text-color-primary: #333333; /* Dark Grey - Main text for excellent readability on white */
+    --text-color-secondary: #555555; /* Medium Grey - Secondary text, slightly lighter */
+
+    /* Card & Transparent Element Backgrounds (Light Theme - "Transparent White") */
+    --card-bg-base: rgba(255, 255, 255, 0.75); /* Transparent White for cards/elements */
+    --card-bg-base-rgb: 255, 255, 255; /* RGB for white, to be used with opacity */
+
+    /* Interactive, Shadow & Glow Colors (Light Theme) */
+    --hover-effect: #B8860B; /* Muted Gold/Bronze - Elegant hover state */
+    --shadow-color: rgba(0, 0, 0, 0.08); /* Very light, subtle shadow for depth */
+    --glow-color: rgba(255, 215, 0, 0.3); /* Lighter gold glow for accents */
+    --hero-overlay-color: rgba(255, 255, 255, 0.7); /* Light overlay for hero sections */
+
+    /* Glassmorphism Properties (General/Light Theme Defaults) */
+    --glass-blur: 10px; /* Moderate blur for a soft, frosted glass effect */
+    --glass-border-opacity: 0.2; /* Subtle border opacity for transparent elements */
+    --glass-border-color: rgba(255, 255, 255, var(--glass-border-opacity)); /* Transparent white border */
+
+    /* Transitions */
+    --transition-speed: 0.3s ease-in-out;
+}
+
+/* --- Dark Theme Variables (Activated by data-theme="dark") --- */
+/* These variables will override the defaults when data-theme="dark" is set on the html or body element. */
+html[data-theme="dark"],
+body[data-theme="dark"] {
+    /* Colors for main elements and accents (Dark Theme) */
+    --primary-color: #FFD700; /* Gold */
+    --secondary-color: #bbbbbb; /* Light grey text */
+
+    /* Backgrounds & Base Colors (Dark Theme) */
+    --body-background: #000000; /* Bold Black - Main background for the page */
+    --main-bg-deep: #000000;    /* Bold Black */
+    --main-bg-deep-rgb: 0, 0, 0; /* RGB components for bold black */
+    --main-bg-mid: #1a1a1a;     /* Very dark grey for subtle gradient/sections */
+    --main-bg-mid-rgb: 26, 26, 26; /* RGB components for very dark grey */
+    --main-bg-light: #2c2c2c;   /* Slightly lighter black for cards */
+    --main-bg-light-rgb: 44, 44, 44; /* RGB components for lighter black */
+
+    /* Text Colors (Dark Theme) */
+    --text-color-primary: #ffffff; /* White text for main content */
+    --text-color-secondary: #cccccc; /* Slightly darker white for secondary text */
+
+    /* Card & Transparent Element Backgrounds (Dark Theme) */
+    --card-bg-base: #2c2c2c; /* Card background (solid dark) */
+    --card-bg-base-rgb: 44, 44, 44; /* RGB for the card base color */
+
+    /* Interactive, Shadow & Glow Colors (Dark Theme) */
+    --hover-effect: #FFEB84; /* Brighter gold for hover */
+    --shadow-color: rgba(0, 0, 0, 0.6); /* Darker shadow for dark theme */
+    --glow-color: rgba(255, 215, 0, 0.6); /* Gold glow */
+    --hero-overlay-color: rgba(0, 0, 0, 0.7); /* Dark overlay for hero */
+
+    /* Glassmorphism Properties (Adjusted for Dark Theme) */
+    --glass-blur: 10px; /* Consistent blur */
+    --glass-border-opacity: 0.15; /* Slightly different border opacity for dark glass */
+    --glass-border-color: rgba(255, 255, 255, var(--glass-border-opacity)); /* Transparent white border on dark background */
+}
 
         * {
             margin: 0;
@@ -63,6 +140,19 @@
             color: var(--primary-color);
             margin-left: 20px;
         }
+        .logo img{
+            height: 60px; /* adjust size as needed */
+            width: 60px;
+            opacity:0.8;
+            transition: all 0.5s ease-in-out;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+            display: block;
+
+            }
+                 .logo img:hover {
+  opacity: 1; /* full visibility on hover */
+  transform: scale(2.05); /* slight zoom effect */
+}
         .sub-page-header .back-link {
             margin-right: 20px;
             padding: 8px 15px;
@@ -280,7 +370,9 @@
 </head>
 <body>
     <header class="sub-page-header">
-        <div class="logo">Ayan Pal</div>
+        <div class="logo">
+                    <img src="ayan_logo.jpg" alt="Ayan pal logo" />
+                </div>
         <a href="index.html" class="back-link">← Back to Portfolio</a>
     </header>
 
