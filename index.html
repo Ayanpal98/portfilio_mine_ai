@@ -1552,6 +1552,37 @@ color: #E6B400;; /* Light champagne gold */
   }
 }
 
+         .visual-showcase {
+  background-color: #0A0A0A;
+  color: #FFD700;
+  padding: 2rem;
+  text-align: center;
+}
+
+.visual-showcase h2 {
+  font-family: 'Segoe UI', sans-serif;
+  margin-bottom: 1.5rem;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.gallery img {
+  max-width: 100%;
+  height: auto;
+  border: 3px solid #FFD700;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
 
     </style>
     <!-- D3.js library for charts -->
@@ -1583,6 +1614,7 @@ color: #E6B400;; /* Light champagne gold */
                     <li><a href="#about">About</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#case-study">Case Study</a></li>
+                    <li><a href="#Animated_visuals">Visuals</a></li>
                     <li><a href="#performance">Performance</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#tools">Tools</a></li>
@@ -1754,6 +1786,15 @@ Let’s create content that doesn't just rank—but resonates.</p>
                     </div>
                 </div>
             </div>
+        </section>
+         <!-- Visual Demonstration to be updated by real life project images (Projects Completions) -->
+        <section id="Animated_visuals" class="visual-showcase">
+          <h2>🎨<span class="highlight">Animated</span> Visuals of <span class="highlight">Projects</span></h2>
+          <div class="gallery">
+          <img src="academic_content%20growth.png" alt="Academic content illustration" width="300" height="300" style="object-fit: cover;">
+          <img src="Ai_automation.png" alt="Ai_automation illustration" width="300" height="300" style="object-fit: cover;">
+          <img src="content_strategy.png" alt="Content strategy illustration" width="300" height="300" style="object-fit: cover;">
+          </div>
         </section>
 
         <!-- New Performance Dashboard Section (Projects Completions) -->
